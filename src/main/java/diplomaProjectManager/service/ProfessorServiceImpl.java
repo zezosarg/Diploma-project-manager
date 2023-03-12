@@ -2,8 +2,10 @@ package diplomaProjectManager.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import diplomaProjectManager.dao.ProfessorDAO;
 import diplomaProjectManager.model.Application;
 import diplomaProjectManager.model.Professor;
 import diplomaProjectManager.model.Subject;
@@ -12,6 +14,9 @@ import diplomaProjectManager.model.Thesis;
 @Service
 public class ProfessorServiceImpl implements ProfessorService {
 
+	@Autowired
+	private ProfessorDAO professorDAO;
+	
 	@Override
 	public Professor retrieveProfile(String string) {
 		// TODO Auto-generated method stub

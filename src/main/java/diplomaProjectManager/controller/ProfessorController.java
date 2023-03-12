@@ -29,12 +29,11 @@ public class ProfessorController {
 //		 String currentPrincipalName = authentication.getName();
 //		 System.err.println(currentPrincipalName);
 		
-        return "professor/dashboard";
+        return "dashboard";
     }
     
-	@RequestMapping("/profile")
 	String retrieveProfile(Model model) {
-		return "professor/profile";
+		return "";
 	}
 
 	String saveProfile(Model model) {
