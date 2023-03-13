@@ -11,7 +11,6 @@ import diplomaProjectManager.service.SubjectService;
 import diplomaProjectManager.service.UserService;
 
 @Controller
-@RequestMapping("/professor")
 public class ProfessorController {
 	
 	@Autowired
@@ -25,15 +24,18 @@ public class ProfessorController {
 
     @RequestMapping("/professor/dashboard")
     public String getProfessorHome(){
-//    	 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		 String currentPrincipalName = authentication.getName();
-//		 System.err.println(currentPrincipalName);
-		
-        return "dashboard";
+//    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//    	String currentPrincipalName = authentication.getName();
+//    	System.err.println(currentPrincipalName);
+
+        return "professor/dashboard";
     }
     
+    @RequestMapping("/professor/profile")
 	String retrieveProfile(Model model) {
-		return "";
+//		Professor professor = professorService.
+//		model.addAtribute("professor", professor);
+    	return "professor/profile";
 	}
 
 	String saveProfile(Model model) {
