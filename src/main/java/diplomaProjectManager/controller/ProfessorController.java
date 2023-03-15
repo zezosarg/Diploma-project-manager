@@ -33,9 +33,7 @@ public class ProfessorController {
     
     @RequestMapping("/professor/profile")
 	String retrieveProfile(Model model) {
-//		Professor professor = professorService.
-//		model.addAtribute("professor", professor);
-    	return "professor/profile";
+    	return "";//"this is professor profile";
 	}
 
 	String saveProfile(Model model) {

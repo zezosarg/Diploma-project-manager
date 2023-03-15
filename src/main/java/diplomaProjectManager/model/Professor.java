@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="professors")
+@Table(name="users")//change to professors once mature
 public class Professor {
 
 	@Id
@@ -22,13 +22,13 @@ public class Professor {
 	@Column(name="id")
 	private int id;
 
-	@Column(name="name")
+	@Column(name="user_name")
 	private String name;
 	
 	@Column(name="specialty")
 	private String specialty;
 	
-	@OneToMany(/*fetch = FetchType.EAGER,*/ cascade=CascadeType.ALL)
+	@OneToMany(/*fetch = FetchType.EAGER,*/ cascade=CascadeType.ALL) //exception produced with fetches
 	@JoinColumn(name="theses")
 	private List<Thesis> theses;
 	

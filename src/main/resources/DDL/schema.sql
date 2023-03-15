@@ -13,24 +13,30 @@ CREATE TABLE `users` (
   `user_name` text DEFAULT NULL,
   `password` text DEFAULT NULL,
   `role` text DEFAULT NULL,
+  `specialty` text DEFAULT NULL,
+  `years_studying` int DEFAULT NULL,
+  `avg_grade` double DEFAULT NULL,
+  `num_courses_left` int DEFAULT NULL, 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-CREATE TABLE `professors` (
-	`id` int NOT NULL AUTO_INCREMENT,
-	`name` text DEFAULT NULL,
-	`specialty` text DEFAULT NULL,
-	PRIMARY KEY (`id`)
-)	ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+# initially will use 1 table for students and professors with unused fields set to null
 
-CREATE TABLE `students` (
-	`id` int NOT NULL AUTO_INCREMENT,
-	`name` text DEFAULT NULL,
-	`years_studying` int DEFAULT NULL,
-	`avg_grade` double DEFAULT NULL,
-	`num_courses_left` int DEFAULT NULL, 
-	PRIMARY KEY (`id`)
-)	ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+#CREATE TABLE `professors` (
+#	`id` int NOT NULL AUTO_INCREMENT,
+#	`name` text DEFAULT NULL,
+#	`specialty` text DEFAULT NULL,
+#	PRIMARY KEY (`id`)
+#)	ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+#
+#CREATE TABLE `students` (
+#	`id` int NOT NULL AUTO_INCREMENT,
+#	`name` text DEFAULT NULL,
+#	`years_studying` int DEFAULT NULL,
+#	`avg_grade` double DEFAULT NULL,
+#	`num_courses_left` int DEFAULT NULL, 
+#	PRIMARY KEY (`id`)
+#)	ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `subjects` (
 	`id` int NOT NULL AUTO_INCREMENT,

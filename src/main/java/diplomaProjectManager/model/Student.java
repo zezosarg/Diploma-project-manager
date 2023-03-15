@@ -14,15 +14,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="students")
+@Table(name="users")//change to students once mature
 public class Student {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="student_id")
+	@Column(name="id")
 	private int id;
 	
-	@Column(name="name")
+	@Column(name="user_name")
 	private String name;
 	
 	@Column(name="years_studying")
@@ -46,3 +46,5 @@ public class Student {
 //		return numCoursesLeft;
 //	}
 }
+
+// TODO username != fullname
