@@ -3,8 +3,12 @@ package diplomaProjectManager.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import diplomaProjectManager.model.Professor;
 import diplomaProjectManager.model.Subject;
 import diplomaProjectManager.service.ProfessorService;
 import diplomaProjectManager.service.SubjectService;
@@ -32,12 +36,14 @@ public class ProfessorController {
     }
     
     @RequestMapping("/professor/profile")
-	String retrieveProfile(Model model) {
-    	return "";//"this is professor profile";
+	public String retrieveProfile(Model model) {
+    	return "professor/profile";
 	}
 
-	String saveProfile(Model model) {
-		return "";
+    @PostMapping("/professor/profile/save")
+	public String saveProfile(@ModelAttribute("professor") Professor professor, Model model) {
+    	professorService.saveProfile(professor);
+		return "redirect:/professor/profile";
 	}
 	
 	String listProfessorSubjects(Model model) {
