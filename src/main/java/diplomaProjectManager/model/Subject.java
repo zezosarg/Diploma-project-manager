@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,10 +26,14 @@ public class Subject {
 	@Column(name="title")
 	private String title;
 	
-	// objectives, is this multivalue?
+	@Column(name="objectives")
+	private String objectives;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="application_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "professor_id")
+	private Professor professor;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Application> applications;
 	
 	// USES BestAppStrategy

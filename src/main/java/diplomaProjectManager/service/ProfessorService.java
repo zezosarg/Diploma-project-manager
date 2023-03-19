@@ -12,11 +12,11 @@ import diplomaProjectManager.model.Thesis;
 @Service
 public interface ProfessorService {
 
-	Professor retrieveProfile(String string);
+	Professor retrieveProfile(String username);
 	
 	void saveProfile(Professor professor);
 	
-	List<Subject> listProfessorSubjects(String string);
+	List<Subject> listProfessorSubjects(String username);
 	
 	void addSubject(String string, Subject subject);
 	

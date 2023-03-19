@@ -3,9 +3,12 @@ package diplomaProjectManager.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import diplomaProjectManager.dao.ProfessorDAO;
+import diplomaProjectManager.dao.SubjectDAO;
 import diplomaProjectManager.model.Application;
 import diplomaProjectManager.model.Professor;
 import diplomaProjectManager.model.Subject;
@@ -16,23 +19,27 @@ public class ProfessorServiceImpl implements ProfessorService {
 
 	@Autowired
 	private ProfessorDAO professorDAO;
+
+	@Autowired
+	private SubjectDAO subjectDAO;
 	
 	@Override
-	public Professor retrieveProfile(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	public Professor retrieveProfile(String username) throws UsernameNotFoundException{
+		return professorDAO.findByUsername(username).orElseThrow(
+				()-> new UsernameNotFoundException(String.format("USER_NOT_FOUND", username))
+		);
 	}
 
 	@Override
+	@Transactional
 	public void saveProfile(Professor professor) {
-		// TODO Auto-generated method stub
-
+		professorDAO.save(professor);
 	}
 
 	@Override
-	public List<Subject> listProfessorSubjects(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public List<Subject> listProfessorSubjects(String username) {
+		return subjectDAO.findByProfessorUsername(username);
 	}
 
 	@Override

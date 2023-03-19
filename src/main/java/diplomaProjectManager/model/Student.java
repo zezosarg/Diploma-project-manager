@@ -22,8 +22,11 @@ public class Student {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="user_name")
-	private String name;
+	@Column(name="user_name", unique=true)
+	private String username;
+	
+	@Column(name="full_name")
+	private String fullname;
 	
 	@Column(name="years_studying")
 	private int yearsStudying;
@@ -35,16 +38,6 @@ public class Student {
 	private int numCoursesLeft;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="application_id")
 	private List<Application> applications;
 
-//	public double getAvgGrade() {
-//		return avgGrade;
-//	}
-//
-//	public int getNumCoursesLeft() {
-//		return numCoursesLeft;
-//	}
 }
-
-// TODO username != fullname

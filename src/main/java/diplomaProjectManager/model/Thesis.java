@@ -1,6 +1,7 @@
 package diplomaProjectManager.model;
 
 import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ public class Thesis {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name="thesis_id")
 	private int id;
 	
 	@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE})

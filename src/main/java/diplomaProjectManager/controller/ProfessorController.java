@@ -1,6 +1,10 @@
 package diplomaProjectManager.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,36 +41,46 @@ public class ProfessorController {
     
     @RequestMapping("/professor/profile")
 	public String retrieveProfile(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+    	Professor professor = professorService.retrieveProfile(currentPrincipalName);
+    	model.addAttribute("professor", professor);
     	return "professor/profile";
 	}
 
+    //for partial save see https://www.baeldung.com/spring-data-partial-update
     @PostMapping("/professor/profile/save")
 	public String saveProfile(@ModelAttribute("professor") Professor professor, Model model) {
     	professorService.saveProfile(professor);
-		return "redirect:/professor/profile";
+		return "redirect:/professor/dashboard";
 	}
 	
-	String listProfessorSubjects(Model model) {
+    @RequestMapping("/professor/subjects")
+	public String listProfessorSubjects(Model model) {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+    	List<Subject> subjects = professorService.listProfessorSubjects(currentPrincipalName);
+    	model.addAttribute("subjects", subjects);
+		return "professor/subjects";
+	}
+	
+	public String showSubject(Model model) {
 		return "";
 	}
 	
-	String showSubject(Model model) {
+	public String addSubject(Subject subject, Model model) {
 		return "";
 	}
 	
-	String addSubject(Subject subject, Model model) {
+	public String listApplications(Integer integer, Model model) {
 		return "";
 	}
 	
-	String listApplications(Integer integer, Model model) {
+	public String assignSubject(Integer integer, Model model) {
 		return "";
 	}
 	
-	String assignSubject(Integer integer, Model model) {
-		return "";
-	}
-	
-	String listProfessorTheses(Model model) {
+	public String listProfessorTheses(Model model) {
 		return "";
 	}
 	

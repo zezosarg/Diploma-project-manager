@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!-- Required meta tags -->
@@ -10,27 +9,38 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-	<title>Professor profile</title>
+	<title>Update profile</title>
 </head>
 
-
 <body>
+	
+	<div class="container">
+	
+		<h3>Profile information</h3>
+		<hr>
+		
+		<p class="h4 mb-4">Update profile</p>
+	
+		<form action="#" th:action="@{/professor/profile/save}" th:object="${professor}" method="POST">
+		
+			<!-- Add hidden form field to prepopulate form -->
+			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:field="*{username}" />
+			<input type="hidden" th:field="*{password}" />	
+			<input type="hidden" th:field="*{role}" />	
 
-<div class="container">
-
-    <form th:action="@{/save}" method="POST" >
-        <h3 th:text="Login"></h3>
-        <input type="text" name="username" th:placeholder="Username" /> <br /><br />
-        <input type="password" th:placeholder="Password" name="password" /> <br /><br />
-        <button type="Submit" class="btn btn-info col-2"> Login </button>
-        <a th:href="@{register}" class="btn btn-primary col-2"> Register </a><br />
-        
-        <div th:if="${param.error}"><p>Username or Password is invalid.</p></div> <br/>
-   
-   		<span th:utext="${successMessage}"></span>
-    </form>
-
-</div>
+			<input type="text" th:field="*{fullname}" class="form-control mb-4 col-4" placeholder="Full name">
+			<input type="text" th:field="*{specialty}" class="form-control mb-4 col-4" placeholder="Specialty">
+				
+			<button type="submit" class="btn btn-info col-2">Save</button>
+						
+		</form>
+	
+		<hr>
+		<a th:href="@{/professor/dashboard}">Back to professor dashboard</a>
+		
+	</div>
 
 </body>
+
 </html>
