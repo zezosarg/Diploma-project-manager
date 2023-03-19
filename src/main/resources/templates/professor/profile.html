@@ -21,7 +21,7 @@
 		
 		<p class="h4 mb-4">Update profile</p>
 	
-		<form action="#" th:action="@{/professor/profile/save}" th:object="${professor}" method="POST">
+		<form action="#" th:action="@{/professor/save}" th:object="${professor}" method="POST">
 		
 			<!-- Add hidden form field to prepopulate form -->
 			<input type="hidden" th:field="*{id}" />

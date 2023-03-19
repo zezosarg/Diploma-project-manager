@@ -21,9 +21,10 @@ public class ProfessorServiceImpl implements ProfessorService {
 	private ProfessorDAO professorDAO;
 
 	@Autowired
-	private SubjectDAO subjectDAO;
+	private SubjectDAO subjectDAO;	//is this good design?
 	
 	@Override
+	@Transactional
 	public Professor retrieveProfile(String username) throws UsernameNotFoundException{
 		return professorDAO.findByUsername(username).orElseThrow(
 				()-> new UsernameNotFoundException(String.format("USER_NOT_FOUND", username))

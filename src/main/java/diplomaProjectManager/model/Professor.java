@@ -18,9 +18,10 @@ import javax.persistence.FetchType;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
+//@Data	//supposed to generate hidden accessors
 @Entity
 @Table(name="users")//change to professors once mature
-//@Data	//supposed to generate hidden accessors
 public class Professor {
 
 	@Id

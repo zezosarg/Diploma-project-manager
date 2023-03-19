@@ -35,7 +35,47 @@ public class Subject {
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Application> applications;
-	
-	// USES BestAppStrategy
 
+	// USES BestAppStrategy
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getObjectives() {
+		return objectives;
+	}
+
+	public void setObjectives(String objectives) {
+		this.objectives = objectives;
+	}
+
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+	}
+
+	public List<Application> getApplications() {
+		return applications;
+	}
+
+	public void setApplications(List<Application> applications) {
+		this.applications = applications;
+	}
+	
 }

@@ -11,8 +11,8 @@ import diplomaProjectManager.model.Subject;
 @Repository
 public interface SubjectDAO extends JpaRepository<Subject, Integer>{
 
-	@Query("SELECT s FROM Subject s, Professor p WHERE p.username = ?1")
 	//@Query("SELECT s FROM Subject s JOIN s.professor p WHERE p.username = ?1")
+	@Query("SELECT s FROM Subject s, Professor p WHERE p.username = ?1")
 	List<Subject> findByProfessorUsername(String username);
 	
 }

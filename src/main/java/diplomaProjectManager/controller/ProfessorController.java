@@ -35,7 +35,7 @@ public class ProfessorController {
 //    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //    	String currentPrincipalName = authentication.getName();
 //    	System.err.println(currentPrincipalName);
-
+//Can i save professor in model???
         return "professor/dashboard";
     }
     
@@ -49,7 +49,7 @@ public class ProfessorController {
 	}
 
     //for partial save see https://www.baeldung.com/spring-data-partial-update
-    @PostMapping("/professor/profile/save")
+    @PostMapping("/professor/save")
 	public String saveProfile(@ModelAttribute("professor") Professor professor, Model model) {
     	professorService.saveProfile(professor);
 		return "redirect:/professor/dashboard";
@@ -64,11 +64,14 @@ public class ProfessorController {
 		return "professor/subjects";
 	}
 	
-	public String showSubject(Model model) {
-		return "";
-	}
-	
-	public String addSubject(Subject subject, Model model) {
+    @RequestMapping("/professor/add-subject")
+    public String addSubject(/*Subject subject, */Model model) {
+    	Subject subject = new Subject();
+    	model.addAttribute("subject", subject);
+    	return "/professor/add-subject";
+    }
+    
+    public String deleteSubject(Subject subject, Model model) {
 		return "";
 	}
 	
