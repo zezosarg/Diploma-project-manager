@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import diplomaProjectManager.model.Application;
 import diplomaProjectManager.model.Professor;
 import diplomaProjectManager.model.Subject;
 import diplomaProjectManager.service.ProfessorService;
@@ -36,7 +37,6 @@ public class ProfessorController {
 //    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //    	String currentPrincipalName = authentication.getName();
 //    	System.err.println(currentPrincipalName);
-//Can i save professor in model???
         return "professor/dashboard";
     }
     
@@ -65,14 +65,14 @@ public class ProfessorController {
 		return "professor/subjects";
 	}
 	
-    //should these go in subject controller?
+    //TODO should these go in subject controller?
     @PostMapping("/subject/save")
 	public String saveSubject(@ModelAttribute("subject") Subject subject, Model model) {
     	subjectService.save(subject);
 		return "redirect:/professor/subjects";
 	}
     
-    //need to pass prof id to subject
+    //TODO need to pass prof id to subject
     @RequestMapping("/professor/add-subject")
     public String addSubject(/*Subject subject, */Model model) {
     	Subject subject = new Subject();
@@ -86,8 +86,11 @@ public class ProfessorController {
 		return "redirect:/professor/subjects";
 	}
 	
+    @RequestMapping("/professor/applications")
 	public String listApplications(Integer integer, Model model) {
-		return "";
+//    	List<Application> applications = professorService.listApplications(string, integer);
+
+		return "professor/applications";
 	}
 	
 	public String assignSubject(Integer integer, Model model) {
