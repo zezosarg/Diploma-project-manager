@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import diplomaProjectManager.model.Professor;
@@ -64,6 +65,14 @@ public class ProfessorController {
 		return "professor/subjects";
 	}
 	
+    //should these go in subject controller?
+    @PostMapping("/subject/save")
+	public String saveSubject(@ModelAttribute("subject") Subject subject, Model model) {
+    	subjectService.save(subject);
+		return "redirect:/professor/subjects";
+	}
+    
+    //need to pass prof id to subject
     @RequestMapping("/professor/add-subject")
     public String addSubject(/*Subject subject, */Model model) {
     	Subject subject = new Subject();
@@ -71,8 +80,10 @@ public class ProfessorController {
     	return "/professor/add-subject";
     }
     
-    public String deleteSubject(Subject subject, Model model) {
-		return "";
+    @RequestMapping("/professor/delete-subject")
+    public String deleteSubject(@RequestParam("subjectId") int subjectId, Model model) {
+    	subjectService.deleteById(subjectId);
+		return "redirect:/professor/subjects";
 	}
 	
 	public String listApplications(Integer integer, Model model) {

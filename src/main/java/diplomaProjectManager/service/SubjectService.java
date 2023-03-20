@@ -15,4 +15,6 @@ public interface SubjectService {
 	
 	Subject findById(Integer id);
 
+	void deleteById(int subjectId);
+
 }

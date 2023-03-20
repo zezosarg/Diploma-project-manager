@@ -33,7 +33,8 @@ public class Subject {
     @JoinColumn(name = "professor_id")
 	private Professor professor;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL/*, mappedBy="subject_id"*/)
+	@JoinColumn(name="application_id")
 	private List<Application> applications;
 
 	// USES BestAppStrategy

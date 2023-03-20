@@ -35,7 +35,7 @@ CREATE TABLE `theses` (
 	`student_id` int DEFAULT NULL,
 	PRIMARY KEY (`thesis_id`),
 	CONSTRAINT `fk_thesis_professor` FOREIGN KEY (`professor_id`) REFERENCES `users` (`user_id`),
-	CONSTRAINT `fk_thesis_subject` FOREIGN KEY (`subject_id`) REFERENCES `users` (`user_id`), 
+	CONSTRAINT `fk_thesis_subject` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`subject_id`), 
 	CONSTRAINT `fk_thesis_student` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`) 
 )	ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
@@ -44,7 +44,7 @@ CREATE TABLE `applications` (
 	`subject_id` int DEFAULT NULL,
 	`student_id` int DEFAULT NULL,
 	PRIMARY KEY (`application_id`),
-	CONSTRAINT `fk_application_subject` FOREIGN KEY (`subject_id`) REFERENCES `users` (`user_id`), 
+	CONSTRAINT `fk_application_subject` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`subject_id`), 
 	CONSTRAINT `fk_application_student` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`)
 )	ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
