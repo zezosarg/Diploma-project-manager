@@ -37,7 +37,7 @@ public class Student {
 	@Column(name="num_courses_left")
 	private int numCoursesLeft;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Application> applications;
 
 }

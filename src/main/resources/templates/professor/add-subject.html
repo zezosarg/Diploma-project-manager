@@ -18,12 +18,13 @@
 	
 		<h3>Subject information</h3>
 		<hr>
-		
-		<p class="h4 mb-4">Add subject</p>
+
+		<p class="h4 mb-4">Add subject </p>
 	
-		<form action="#" th:action="@{/subject/save}" th:object="${subject}" method="POST">
+		<form action="#" th:action="@{/professor/save-subject}" th:object="${subject}" method="POST">
 		
-			<!-- <input type="hidden" th:field="*{id}" /> -->
+			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:field="*{professor}" />
 
 			<input type="text" th:field="*{title}" class="form-control mb-4 col-4" placeholder="Title">
 			<input type="text" th:field="*{objectives}" class="form-control mb-4 col-4" placeholder="Objectives">

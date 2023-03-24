@@ -38,7 +38,7 @@ public class Subject {
 	private List<Application> applications;
 
 	// USES BestAppStrategy
-	
+
 	public int getId() {
 		return id;
 	}

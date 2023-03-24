@@ -48,7 +48,8 @@ public class Professor {
 	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="professor")
 	private List<Thesis> theses;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="professor")
+	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="professor")
+	//@JoinColumn(name = "professor_id")
 	private List<Subject> subjects;
 
 	public int getId() {

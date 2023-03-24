@@ -20,10 +20,12 @@ public interface ProfessorService {
 	
 	void addSubject(String string, Subject subject);
 	
-	List<Application> listApplications(String string, Integer integer);
-	
 	List<Thesis> listProfessorTheses(String string);
 	
 	void assignSubject(String string, Integer integer);
+	
+	//List<Application> listApplications(String string, Integer integer);
+	
+	List<Application> listApplications(int subjectId);
 	
 }

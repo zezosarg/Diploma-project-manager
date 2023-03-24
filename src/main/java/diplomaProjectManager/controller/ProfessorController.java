@@ -25,25 +25,20 @@ public class ProfessorController {
 	
 	@Autowired
 	private UserService userService;
-	
 	@Autowired
 	private ProfessorService professorService;
-	
 	@Autowired
 	private SubjectService subjectService;
-
+	
     @RequestMapping("/professor/dashboard")
     public String getProfessorHome(){
-//    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//    	String currentPrincipalName = authentication.getName();
-//    	System.err.println(currentPrincipalName);
         return "professor/dashboard";
     }
     
     @RequestMapping("/professor/profile")
 	public String retrieveProfile(Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	String currentPrincipalName = authentication.getName();
     	Professor professor = professorService.retrieveProfile(currentPrincipalName);
     	model.addAttribute("professor", professor);
     	return "professor/profile";
@@ -66,16 +61,19 @@ public class ProfessorController {
 	}
 	
     //TODO should these go in subject controller?
-    @PostMapping("/subject/save")
+    @PostMapping("/professor/save-subject")
 	public String saveSubject(@ModelAttribute("subject") Subject subject, Model model) {
     	subjectService.save(subject);
 		return "redirect:/professor/subjects";
 	}
     
-    //TODO need to pass prof id to subject
     @RequestMapping("/professor/add-subject")
     public String addSubject(/*Subject subject, */Model model) {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+    	Professor professor = professorService.retrieveProfile(currentPrincipalName);
     	Subject subject = new Subject();
+    	subject.setProfessor(professor);//professorService.addSubject(string, subject);
     	model.addAttribute("subject", subject);
     	return "/professor/add-subject";
     }
@@ -87,9 +85,9 @@ public class ProfessorController {
 	}
 	
     @RequestMapping("/professor/applications")
-	public String listApplications(Integer integer, Model model) {
-//    	List<Application> applications = professorService.listApplications(string, integer);
-
+	public String listApplications(@RequestParam("subjectId") int subjectId, Model model) {
+    	List<Application> applications = professorService.listApplications(subjectId);
+    	model.addAttribute(applications);
 		return "professor/applications";
 	}
 	
@@ -97,8 +95,9 @@ public class ProfessorController {
 		return "";
 	}
 	
+	@RequestMapping("/professor/theses")
 	public String listProfessorTheses(Model model) {
-		return "";
+		return "professor/theses";
 	}
 	
 }

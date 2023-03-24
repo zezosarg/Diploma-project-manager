@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Subjects applications list</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>Subject applications list</h3>
+	<hr>
+	
+	<!-- Add a button 
+	<a th:href="@{/professor/add-subject}"
+		class="btn btn-primary btn-sm mb-3">
+		Add subject
+	</a> -->
+	
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<!-- <th>Title</th>
+				<th>Objectives</th> -->
+				<th>Assign method</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="application : ${applications}">
+			
+				<!-- <td th:text="${subject.title}" />	
+				<td th:text="${subject.objectives}" /> -->		
+				
+				<td>
+					
+					<a th:href="@{/professor/assignSubject(subjectId=${subject.id})}"
+					   class="btn btn-info btn-sm">
+						Random choice
+					</a>
+										
+					<a th:href="@{/professor/assignSubject(subjectId=${subject.id})}"
+					   class="btn btn-info btn-sm">
+						Best grade
+					</a>
+
+					<a th:href="@{/professor/assignSubject(subjectId=${subject.id})}"
+					   class="btn btn-info btn-sm">
+						Fewest courses
+					</a>
+
+					<a th:href="@{/professor/assignSubject(subjectId=${subject.id})}"
+					   class="btn btn-info btn-sm">
+						Threshold
+					</a>
+					
+				</td>
+				
+			</tr>
+		</tbody>		
+	</table>
+
+		<hr>
+		<a th:href="@{/professor/subjects}">Back to professor subjects</a>	
+
+</div>
+	
+</body>
+</html>

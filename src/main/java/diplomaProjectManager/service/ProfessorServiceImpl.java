@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import diplomaProjectManager.dao.ApplicationDAO;
 import diplomaProjectManager.dao.ProfessorDAO;
 import diplomaProjectManager.dao.SubjectDAO;
 import diplomaProjectManager.model.Application;
@@ -22,6 +23,9 @@ public class ProfessorServiceImpl implements ProfessorService {
 
 	@Autowired
 	private SubjectDAO subjectDAO;	//is this good design?
+	
+	@Autowired
+	private ApplicationDAO applicationDAO;	//is this good design?
 	
 	@Override
 	@Transactional
@@ -50,9 +54,8 @@ public class ProfessorServiceImpl implements ProfessorService {
 	}
 
 	@Override
-	public List<Application> listApplications(String string, Integer integer) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Application> listApplications(/*String string, */int subjectId) {
+		return applicationDAO.findBySubject(subjectId);
 	}
 
 	@Override
