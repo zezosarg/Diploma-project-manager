@@ -29,8 +29,7 @@ public class SubjectServiceImpl implements SubjectService {
 	
 	@Override
 	public List<Subject> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return subjectDAO.findAll();
 	}
 
 	@Override

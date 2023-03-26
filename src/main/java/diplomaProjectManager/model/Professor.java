@@ -49,7 +49,7 @@ public class Professor {
 	private List<Thesis> theses;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="professor")
-	//@JoinColumn(name = "professor_id")
+	//@JoinColumn(name = "professor_id")	//collides with mappedBy
 	private List<Subject> subjects;
 
 	public int getId() {

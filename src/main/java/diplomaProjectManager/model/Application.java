@@ -16,4 +16,8 @@ public class Application {
 	@Column(name="application_id")
 	private int id;
 
+	public int getId() {
+		return id;
+	}
+
 }

@@ -9,22 +9,15 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-	<title>Subjects list</title>
+	<title>Subject details</title>
 </head>
 
 <body>
 
 <div class="container">
 
-	<h3>Subjects list</h3>
-	<hr>
-	
-	<!-- Add a button -->
-	<a th:href="@{/professor/add-subject}"
-		class="btn btn-primary btn-sm mb-3">
-		Add subject
-	</a>
-	
+	<h3>Subjects details</h3>
+	<hr>	
 	
 	<table class="table table-bordered table-striped">
 		<thead class="thead-dark">
@@ -36,33 +29,21 @@
 		</thead>
 		
 		<tbody>
-			<tr th:each="subject : ${subjects}">
-			
 				<td th:text="${subject.title}" />	
 				<td th:text="${subject.objectives}" />		
 				
 				<td>
-					<!-- Add "applications" button/link -->
-					<a th:href="@{/professor/applications(subjectId=${subject.id})}"
+					<a th:href="@{/student/subject(subjectId=${subject.id})}"
 					   class="btn btn-info btn-sm">
-						Applications
-					</a>
-					
-					<!-- Add "delete" button/link -->					
-					<a th:href="@{/professor/delete-subject(subjectId=${subject.id})}"
-					   class="btn btn-danger btn-sm"
-					   onclick="if (!(confirm('Are you sure you want to delete this subject?'))) return false">
-						Delete
+						Apply
 					</a>
 					
 				</td>
-				
-			</tr>
 		</tbody>		
 	</table>
 
 		<hr>
-		<a th:href="@{/professor/dashboard}">Back to professor dashboard</a>	
+		<a th:href="@{/student/dashboard}">Back to student subjects</a>	
 
 </div>
 	

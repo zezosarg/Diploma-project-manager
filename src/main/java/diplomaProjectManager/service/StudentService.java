@@ -12,7 +12,7 @@ public interface StudentService {
 
 	void saveProfile(Student student);
 	
-	Student retrieveProfile(String string);
+	Student retrieveProfile(String username);
 	
 	List<Subject> listStudentSubjects();
 	

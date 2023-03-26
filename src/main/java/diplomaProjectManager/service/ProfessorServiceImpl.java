@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import diplomaProjectManager.dao.ApplicationDAO;
 import diplomaProjectManager.dao.ProfessorDAO;
 import diplomaProjectManager.dao.SubjectDAO;
+import diplomaProjectManager.dao.ThesisDAO;
 import diplomaProjectManager.model.Application;
 import diplomaProjectManager.model.Professor;
 import diplomaProjectManager.model.Subject;
@@ -22,10 +23,13 @@ public class ProfessorServiceImpl implements ProfessorService {
 	private ProfessorDAO professorDAO;
 
 	@Autowired
-	private SubjectDAO subjectDAO;	//is this good design?
+	private SubjectDAO subjectDAO;	//is this good design?//should this be delegated to subject service?
 	
 	@Autowired
 	private ApplicationDAO applicationDAO;	//is this good design?
+	
+	@Autowired
+	private ThesisDAO thesisDAO;	//is this good design?
 	
 	@Override
 	@Transactional
@@ -48,23 +52,26 @@ public class ProfessorServiceImpl implements ProfessorService {
 	}
 
 	@Override
+	@Transactional
 	public void addSubject(String string, Subject subject) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
+	@Transactional
 	public List<Application> listApplications(/*String string, */int subjectId) {
 		return applicationDAO.findBySubject(subjectId);
 	}
 
 	@Override
-	public List<Thesis> listProfessorTheses(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public List<Thesis> listProfessorTheses(String username) {
+		return thesisDAO.findByProfessorUsername(username);
 	}
 
 	@Override
+	@Transactional
 	public void assignSubject(String string, Integer integer) {
 		// TODO Auto-generated method stub
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import diplomaProjectManager.model.Application;
 import diplomaProjectManager.model.Professor;
 import diplomaProjectManager.model.Subject;
+import diplomaProjectManager.model.Thesis;
 import diplomaProjectManager.service.ProfessorService;
 import diplomaProjectManager.service.SubjectService;
 import diplomaProjectManager.service.UserService;
@@ -23,6 +24,7 @@ import diplomaProjectManager.service.UserService;
 @Controller
 public class ProfessorController {
 	
+//	private String currentPrincipalName; //saving username here works but is it safe?
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -32,6 +34,8 @@ public class ProfessorController {
 	
     @RequestMapping("/professor/dashboard")
     public String getProfessorHome(){
+//    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//    	String currentPrincipalName = authentication.getName();
         return "professor/dashboard";
     }
     
@@ -75,7 +79,7 @@ public class ProfessorController {
     	Subject subject = new Subject();
     	subject.setProfessor(professor);//professorService.addSubject(string, subject);
     	model.addAttribute("subject", subject);
-    	return "/professor/add-subject";
+    	return "/professor/subject";
     }
     
     @RequestMapping("/professor/delete-subject")
@@ -88,7 +92,7 @@ public class ProfessorController {
 	public String listApplications(@RequestParam("subjectId") int subjectId, Model model) {
     	List<Application> applications = professorService.listApplications(subjectId);
     	model.addAttribute(applications);
-		return "professor/applications";
+		return "/professor/applications";
 	}
 	
 	public String assignSubject(Integer integer, Model model) {
@@ -97,7 +101,13 @@ public class ProfessorController {
 	
 	@RequestMapping("/professor/theses")
 	public String listProfessorTheses(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+    	List<Thesis> theses = professorService.listProfessorTheses(currentPrincipalName);
+    	model.addAttribute("theses", theses);
 		return "professor/theses";
 	}
 	
 }
+
+//TODO have not checked for availability of subject and such, maybe delete assigned subjects
