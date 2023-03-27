@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import diplomaProjectManager.dao.ApplicationDAO;
+import diplomaProjectManager.dao.SubjectDAO;
 import diplomaProjectManager.model.Application;
 import diplomaProjectManager.model.Professor;
 import diplomaProjectManager.model.Student;
@@ -24,6 +26,10 @@ public class StudentController {
 
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private ApplicationDAO applicationDAO; //temporary
+	@Autowired
+	private SubjectDAO subjectDAO;	//temporary
 
     @RequestMapping("/student/dashboard")
     public String getStudentHome(){
@@ -43,7 +49,7 @@ public class StudentController {
 	public String saveProfile(@ModelAttribute("student") Student student, Model model) {
     	studentService.saveProfile(student);
 		return "redirect:/student/dashboard";
-	}
+	}// TODO show success message
     
     @RequestMapping("/student/subjects")
 	public String listStudentSubjects(Model model) {
@@ -53,14 +59,22 @@ public class StudentController {
 	}
     
     @RequestMapping("/student/applyToSubject")
-    public String applyToSubject(@RequestParam("subjectId") int subjectId, Model model) {	//either delete subject or select only unassigned
+    public String applyToSubject(@RequestParam("subjectId") int subjectId, Model model) {
+    	
+    	Application application = new Application();
+
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
     	Student student = studentService.retrieveProfile(currentPrincipalName);
-    	Application application = new Application();
+    	student.getApplications().add(application);
     	
-    	return "";
-    }
+    	Subject subject = subjectDAO.findById(subjectId);
+    	subject.getApplications().add(application);
+    	
+    	applicationDAO.save(application);
+    	
+    	return "redirect:/student/subjects";
+    }	//TODO prevent multiple applications, move logic to service
     
     //public String showSubjectDetails() //TODO
 }

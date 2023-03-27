@@ -93,7 +93,7 @@ public class ProfessorController {
     	List<Application> applications = professorService.listApplications(subjectId);
     	model.addAttribute(applications);
 		return "/professor/applications";
-	}
+	}//TODO can't see apps
 	
 	public String assignSubject(Integer integer, Model model) {
 		return "";
@@ -108,6 +108,4 @@ public class ProfessorController {
 		return "professor/theses";
 	}
 	
-}
-
-//TODO have not checked for availability of subject and such, maybe delete assigned subjects
+}//TODO show only available subjects

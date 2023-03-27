@@ -34,7 +34,7 @@ public class Subject {
 	private Professor professor;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="application_id")
+	@JoinColumn(name="subject_id")
 	private List<Application> applications;
 
 	// USES BestAppStrategy
