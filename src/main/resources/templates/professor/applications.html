@@ -27,6 +27,7 @@
 	
 	
 	<table class="table table-bordered table-striped">
+		
 		<thead class="thead-dark">
 			<tr>
 				<!-- <th>Title</th>
@@ -36,18 +37,17 @@
 		</thead>
 		
 		<tbody>
-			<tr th:each="application : ${applications}">
+			<tr th:each="app : ${applications}">	<!-- application is a reserved word as per spring compiler -->
 			
-				<!-- <td th:text="${subject.title}" />	
-				<td th:text="${subject.objectives}" /> -->		
+				<td th:text="${app.id}" />	
 				
 				<td>
 					
-					<a th:href="@{/professor/assignSubject(subjectId=${subject.id})}"
+					<a th:href="@{/professor/assignSubject(subjectId=${subjectId}, strategy='random')}"
 					   class="btn btn-info btn-sm">
 						Random choice
 					</a>
-										
+<!--										
 					<a th:href="@{/professor/assignSubject(subjectId=${subject.id})}"
 					   class="btn btn-info btn-sm">
 						Best grade
@@ -62,11 +62,12 @@
 					   class="btn btn-info btn-sm">
 						Threshold
 					</a>
-					
+-->					
 				</td>
 				
 			</tr>
-		</tbody>		
+		</tbody>	
+	
 	</table>
 
 		<hr>

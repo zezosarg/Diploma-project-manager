@@ -91,12 +91,14 @@ public class ProfessorController {
     @RequestMapping("/professor/applications")
 	public String listApplications(@RequestParam("subjectId") int subjectId, Model model) {
     	List<Application> applications = professorService.listApplications(subjectId);
-    	model.addAttribute(applications);
+    	model.addAttribute("applications", applications);
+    	model.addAttribute("subjectId", subjectId);
 		return "/professor/applications";
 	}//TODO can't see apps
 	
-	public String assignSubject(Integer integer, Model model) {
-		return "";
+    @RequestMapping("/professor/assignSubject")
+	public String assignSubject(@RequestParam("subjectId") int subjectId, @RequestParam("strategy") String strategy, Model model) {
+		return "redirect:/professor/subjects";
 	}
 	
 	@RequestMapping("/professor/theses")
