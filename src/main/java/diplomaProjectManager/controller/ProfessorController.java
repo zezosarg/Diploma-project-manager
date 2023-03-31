@@ -3,6 +3,7 @@ package diplomaProjectManager.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,8 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import diplomaProjectManager.dao.StudentDAO;
+import diplomaProjectManager.dao.SubjectDAO;
+import diplomaProjectManager.dao.ThesisDAO;
 import diplomaProjectManager.model.Application;
+import diplomaProjectManager.model.BestApplicantStrategy;
+import diplomaProjectManager.model.BestApplicantStrategyFactory;
 import diplomaProjectManager.model.Professor;
+import diplomaProjectManager.model.Student;
 import diplomaProjectManager.model.Subject;
 import diplomaProjectManager.model.Thesis;
 import diplomaProjectManager.service.ProfessorService;
@@ -31,8 +38,14 @@ public class ProfessorController {
 	private ProfessorService professorService;
 	@Autowired
 	private SubjectService subjectService;
-	
-    @RequestMapping("/professor/dashboard")
+	@Autowired
+	private SubjectDAO subjectDAO;	//temp
+//	@Autowired
+//	private StudentDAO studentDAO;	//temp
+	@Autowired
+	private ThesisDAO thesisDAO;	//temp
+
+	@RequestMapping("/professor/dashboard")
     public String getProfessorHome(){
 //    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //    	String currentPrincipalName = authentication.getName();
@@ -97,8 +110,29 @@ public class ProfessorController {
 	}//TODO can't see apps
 	
     @RequestMapping("/professor/assignSubject")
-	public String assignSubject(@RequestParam("subjectId") int subjectId, @RequestParam("strategy") String strategy, Model model) {
-		return "redirect:/professor/subjects";
+	public String assignSubject(
+			@RequestParam("subjectId") int subjectId, 
+			//@RequestParam("applicationId") int applicationId, 
+			@RequestParam("strategyName") String strategyName, 
+			Model model) {
+		
+    	Thesis thesis = new Thesis();    	
+    	
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+    	Professor professor = professorService.retrieveProfile(currentPrincipalName);
+    	thesis.setProfessor(professor);
+    	
+    	Subject subject = subjectDAO.findById(subjectId);
+    	thesis.setSubject(subject);
+    	
+    	BestApplicantStrategy strategy = BestApplicantStrategyFactory.createStrategy(strategyName);
+    	Student student = strategy.findBestApplicant(subject.getApplications());//studentDAO.findByApplicationId(applicationId);
+    	thesis.setStudent(student);
+    	
+    	thesisDAO.save(thesis);
+    	
+    	return "redirect:/professor/subjects";
 	}
 	
 	@RequestMapping("/professor/theses")

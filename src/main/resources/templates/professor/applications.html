@@ -18,21 +18,37 @@
 
 	<h3>Subject applications list</h3>
 	<hr>
+
+	Assign By
 	
-	<!-- Add a button 
-	<a th:href="@{/professor/add-subject}"
-		class="btn btn-primary btn-sm mb-3">
-		Add subject
-	</a> -->
-	
+	<a th:href="@{/professor/assignSubject(subjectId=${subjectId}, strategyName='random')}"
+	   class="btn btn-info btn-sm">
+		Random choice
+	</a>
+					
+	<a th:href="@{/professor/assignSubject(subjectId=${subjectId}, strategyName='avgGrade')}"
+	   class="btn btn-info btn-sm">
+		Best grade
+	</a>
+
+	<a th:href="@{/professor/assignSubject(subjectId=${subjectId}, strategyName='fewestCourses')}"
+	   class="btn btn-info btn-sm">
+		Fewest courses
+	</a>
+<!--
+	<a th:href="@{/professor/assignSubject(subjectId=${subjectId})}"
+	   class="btn btn-info btn-sm">
+		Threshold
+	</a>
+-->
+
+	<hr>
 	
 	<table class="table table-bordered table-striped">
 		
 		<thead class="thead-dark">
 			<tr>
-				<!-- <th>Title</th>
-				<th>Objectives</th> -->
-				<th>Assign method</th>
+				<th>Application ID</th>
 			</tr>
 		</thead>
 		
@@ -40,30 +56,6 @@
 			<tr th:each="app : ${applications}">	<!-- application is a reserved word as per spring compiler -->
 			
 				<td th:text="${app.id}" />	
-				
-				<td>
-					
-					<a th:href="@{/professor/assignSubject(subjectId=${subjectId}, strategy='random')}"
-					   class="btn btn-info btn-sm">
-						Random choice
-					</a>
-<!--										
-					<a th:href="@{/professor/assignSubject(subjectId=${subject.id})}"
-					   class="btn btn-info btn-sm">
-						Best grade
-					</a>
-
-					<a th:href="@{/professor/assignSubject(subjectId=${subject.id})}"
-					   class="btn btn-info btn-sm">
-						Fewest courses
-					</a>
-
-					<a th:href="@{/professor/assignSubject(subjectId=${subject.id})}"
-					   class="btn btn-info btn-sm">
-						Threshold
-					</a>
--->					
-				</td>
 				
 			</tr>
 		</tbody>	
