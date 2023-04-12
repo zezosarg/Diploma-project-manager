@@ -16,6 +16,6 @@ public interface StudentService {
 	
 	List<Subject> listStudentSubjects();
 	
-	void applyToSubject(String string, Integer integer);
+	void applyToSubject(String username, int subjectId);
 	
 }

@@ -31,20 +31,12 @@ import diplomaProjectManager.service.UserService;
 @Controller
 public class ProfessorController {
 	
-//	private String currentPrincipalName; //saving username here works but is it safe?
-	@Autowired
-	private UserService userService;
+//	private String currentPrincipalName;
 	@Autowired
 	private ProfessorService professorService;
 	@Autowired
 	private SubjectService subjectService;
-	@Autowired
-	private SubjectDAO subjectDAO;	//temp
-//	@Autowired
-//	private StudentDAO studentDAO;	//temp
-	@Autowired
-	private ThesisDAO thesisDAO;	//temp
-
+	
 	@RequestMapping("/professor/dashboard")
     public String getProfessorHome(){
 //    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -61,7 +53,6 @@ public class ProfessorController {
     	return "professor/profile";
 	}
 
-    //for partial save see https://www.baeldung.com/spring-data-partial-update
     @PostMapping("/professor/save")
 	public String saveProfile(@ModelAttribute("professor") Professor professor, Model model) {
     	professorService.saveProfile(professor);
@@ -77,7 +68,6 @@ public class ProfessorController {
 		return "professor/subjects";
 	}
 	
-    //TODO should these go in subject controller?
     @PostMapping("/professor/save-subject")
 	public String saveSubject(@ModelAttribute("subject") Subject subject, Model model) {
     	subjectService.save(subject);
@@ -85,7 +75,7 @@ public class ProfessorController {
 	}
     
     @RequestMapping("/professor/add-subject")
-    public String addSubject(/*Subject subject, */Model model) {
+    public String addSubject(Model model) {
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
     	Professor professor = professorService.retrieveProfile(currentPrincipalName);
@@ -107,31 +97,13 @@ public class ProfessorController {
     	model.addAttribute("applications", applications);
     	model.addAttribute("subjectId", subjectId);
 		return "/professor/applications";
-	}//TODO can't see apps
+	}
 	
     @RequestMapping("/professor/assignSubject")
-	public String assignSubject(
-			@RequestParam("subjectId") int subjectId, 
-			//@RequestParam("applicationId") int applicationId, 
-			@RequestParam("strategyName") String strategyName, 
-			Model model) {
-		
-    	Thesis thesis = new Thesis();    	
-    	
+	public String assignSubject(@RequestParam("subjectId") int subjectId, @RequestParam("strategyName") String strategyName, Model model) {
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-    	Professor professor = professorService.retrieveProfile(currentPrincipalName);
-    	thesis.setProfessor(professor);
-    	
-    	Subject subject = subjectDAO.findById(subjectId);
-    	thesis.setSubject(subject);
-    	
-    	BestApplicantStrategy strategy = BestApplicantStrategyFactory.createStrategy(strategyName);
-    	Student student = strategy.findBestApplicant(subject.getApplications());//studentDAO.findByApplicationId(applicationId);
-    	thesis.setStudent(student);
-    	
-    	thesisDAO.save(thesis);
-    	
+    	String currentPrincipalName = authentication.getName();		
+    	professorService.assignSubject(currentPrincipalName, strategyName, subjectId);
     	return "redirect:/professor/subjects";
 	}
 	
@@ -144,4 +116,17 @@ public class ProfessorController {
 		return "professor/theses";
 	}
 	
-}//TODO show only available subjects
+	@RequestMapping("/professor/setGrades")
+	public String setGrades(@RequestParam("thesisId") int thesisId, Model model) {
+		Thesis thesis = professorService.retrieveThesis(thesisId);
+    	model.addAttribute("thesis", thesis);
+    	return "professor/thesis";
+	}
+	
+	@PostMapping("/professor/saveThesis")
+	public String saveThesis(@ModelAttribute("thesis") Thesis thesis, Model model) {
+    	thesis.calculateGrade();
+		professorService.saveThesis(thesis);
+		return "redirect:/professor/theses";
+	}
+}

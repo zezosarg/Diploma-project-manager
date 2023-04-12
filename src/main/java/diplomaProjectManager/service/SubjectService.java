@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import diplomaProjectManager.model.Subject;
+import diplomaProjectManager.model.Thesis;
 
 @Service
 public interface SubjectService {
@@ -13,7 +14,7 @@ public interface SubjectService {
 	
 	List<Subject> findAll();
 	
-	Subject findById(Integer id);
+	Subject findById(int id);
 
 	void deleteById(int subjectId);
 

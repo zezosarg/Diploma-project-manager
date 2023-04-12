@@ -12,7 +12,10 @@ import diplomaProjectManager.dao.ProfessorDAO;
 import diplomaProjectManager.dao.SubjectDAO;
 import diplomaProjectManager.dao.ThesisDAO;
 import diplomaProjectManager.model.Application;
+import diplomaProjectManager.model.BestApplicantStrategy;
+import diplomaProjectManager.model.BestApplicantStrategyFactory;
 import diplomaProjectManager.model.Professor;
+import diplomaProjectManager.model.Student;
 import diplomaProjectManager.model.Subject;
 import diplomaProjectManager.model.Thesis;
 
@@ -21,15 +24,14 @@ public class ProfessorServiceImpl implements ProfessorService {
 
 	@Autowired
 	private ProfessorDAO professorDAO;
-
 	@Autowired
 	private SubjectDAO subjectDAO;	//is this good design?//should this be delegated to subject service?
-	
 	@Autowired
-	private ApplicationDAO applicationDAO;	//is this good design?
-	
+	private ApplicationDAO applicationDAO;
 	@Autowired
-	private ThesisDAO thesisDAO;	//is this good design?
+	private ThesisDAO thesisDAO;
+	@Autowired
+	private BestApplicantStrategyFactory bestApplicantStrategyFactory;
 	
 	@Override
 	@Transactional
@@ -55,7 +57,6 @@ public class ProfessorServiceImpl implements ProfessorService {
 	@Transactional
 	public void addSubject(String string, Subject subject) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -72,9 +73,27 @@ public class ProfessorServiceImpl implements ProfessorService {
 
 	@Override
 	@Transactional
-	public void assignSubject(String string, Integer integer) {
-		// TODO Auto-generated method stub
-
+	public void assignSubject(String username, String strategyName, int subjectId) {
+    	Thesis thesis = new Thesis();    	    	
+    	Professor professor = retrieveProfile(username);
+    	thesis.setProfessor(professor);
+    	Subject subject = subjectDAO.findById(subjectId);
+    	thesis.setSubject(subject);
+    	BestApplicantStrategy strategy = bestApplicantStrategyFactory.createStrategy(strategyName);
+    	Student student = strategy.findBestApplicant(subject.getApplications());
+    	thesis.setStudent(student);
+    	thesisDAO.save(thesis);
 	}
 
+	@Override
+	@Transactional
+	public Thesis retrieveThesis(int thesisId) {
+		return thesisDAO.findById(thesisId);
+	}
+
+	@Override
+	@Transactional
+	public void saveThesis(Thesis thesis) {
+		thesisDAO.save(thesis);
+	}
 }

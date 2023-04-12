@@ -3,6 +3,7 @@ package diplomaProjectManager.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,16 +21,11 @@ import diplomaProjectManager.model.Student;
 import diplomaProjectManager.model.Subject;
 import diplomaProjectManager.service.StudentService;
 
-
 @Controller
 public class StudentController {
 
 	@Autowired
 	private StudentService studentService;
-	@Autowired
-	private ApplicationDAO applicationDAO; //temporary
-	@Autowired
-	private SubjectDAO subjectDAO;	//temporary
 
     @RequestMapping("/student/dashboard")
     public String getStudentHome(){
@@ -60,21 +56,11 @@ public class StudentController {
     
     @RequestMapping("/student/applyToSubject")
     public String applyToSubject(@RequestParam("subjectId") int subjectId, Model model) {
-    	
-    	Application application = new Application();
-
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
-    	Student student = studentService.retrieveProfile(currentPrincipalName);
-    	student.getApplications().add(application);
-    	
-    	Subject subject = subjectDAO.findById(subjectId);
-    	subject.getApplications().add(application);
-    	
-    	applicationDAO.save(application);
-    	
+		studentService.applyToSubject(currentPrincipalName, subjectId);
     	return "redirect:/student/subjects";
-    }	//TODO prevent multiple applications, move logic to service
+    }
     
     //public String showSubjectDetails() //TODO
 }

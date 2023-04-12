@@ -11,8 +11,11 @@ import diplomaProjectManager.model.Subject;
 @Repository
 public interface SubjectDAO extends JpaRepository<Subject, Integer>{
 
-	@Query("SELECT s FROM Subject s, Professor p WHERE p.username = ?1") // TODO AND s NOT IN (Thesis) OR delete subjects on assignment
+	@Query(value="SELECT * FROM subjects, users WHERE user_name=?1 AND subject_id NOT IN (SELECT subject_id FROM theses)", nativeQuery=true)
 	List<Subject> findByProfessorUsername(String username);
+	
+	@Query(value="SELECT * FROM subjects, users WHERE subject_id NOT IN (SELECT subject_id FROM theses)", nativeQuery=true)
+	List<Subject> findAvailable();
 	
 	Subject findById(int subjectId);
 }

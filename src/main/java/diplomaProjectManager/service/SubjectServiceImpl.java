@@ -28,15 +28,14 @@ public class SubjectServiceImpl implements SubjectService {
 	}
 	
 	@Override
+	@Transactional
 	public List<Subject> findAll() {
-		return subjectDAO.findAll();
+		return subjectDAO.findAvailable();
 	}
 
 	@Override
-	public Subject findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public Subject findById(int id) {
+		return subjectDAO.findById(id);
 	}
-
-
 }

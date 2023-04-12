@@ -11,7 +11,7 @@ import diplomaProjectManager.model.Application;
 @Repository
 public interface ApplicationDAO extends JpaRepository<Application, Integer>{
 
-	@Query("SELECT a FROM Application a, Subject s WHERE s.id = ?1")
+	@Query(value = "SELECT * FROM applications AS a JOIN subjects AS s ON a.subject_id=s.subject_id WHERE a.subject_id=?1", nativeQuery=true)
 	List<Application> findBySubject(int subjectId);
 
 }

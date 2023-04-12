@@ -14,4 +14,5 @@ public interface ThesisDAO extends JpaRepository<Thesis, Integer>{
 	@Query("SELECT t FROM Thesis t, Professor p WHERE p.username = ?1")
 	List<Thesis> findByProfessorUsername(String username);
 
+	Thesis findById(int id);
 }

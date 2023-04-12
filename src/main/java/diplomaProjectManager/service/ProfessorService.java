@@ -22,10 +22,11 @@ public interface ProfessorService {
 	
 	List<Thesis> listProfessorTheses(String string);
 	
-	void assignSubject(String string, Integer integer);
-	
-	//List<Application> listApplications(String string, Integer integer);
-	
+	void assignSubject(String username, String string, int integer);
+		
 	List<Application> listApplications(int subjectId);
 	
+	Thesis retrieveThesis(int thesisId);
+
+	void saveThesis(Thesis thesis);
 }
