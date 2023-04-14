@@ -37,8 +37,6 @@ public class Subject {
 	@JoinColumn(name="subject_id")
 	private List<Application> applications;
 
-	// USES BestAppStrategy
-
 	public int getId() {
 		return id;
 	}

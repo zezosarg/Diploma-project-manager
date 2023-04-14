@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import diplomaProjectManager.model.Subject;
-import diplomaProjectManager.model.Thesis;
 
 @Service
 public interface SubjectService {

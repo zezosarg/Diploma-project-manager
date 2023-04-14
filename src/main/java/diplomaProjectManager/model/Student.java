@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="users")//change to students once mature
+@Table(name="users")
 public class Student {
 
 	@Id

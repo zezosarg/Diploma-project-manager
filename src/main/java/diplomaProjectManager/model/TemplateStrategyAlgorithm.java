@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import diplomaProjectManager.dao.StudentDAO;
 
@@ -12,7 +11,7 @@ import diplomaProjectManager.dao.StudentDAO;
 public abstract class TemplateStrategyAlgorithm implements BestApplicantStrategy{
 
 	@Autowired
-	private StudentDAO studentDAO; //should this go inside method to be inherited?
+	private StudentDAO studentDAO;
 	
 	@Override
 	public Student findBestApplicant(List<Application> applications) {
@@ -27,5 +26,3 @@ public abstract class TemplateStrategyAlgorithm implements BestApplicantStrategy
 	public abstract int compareApplications(Application application1, Application application2);
 	
 }
-
-//We may have to use Optional<Student>

@@ -16,7 +16,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import diplomaProjectManager.service.UserServiceImpl;
 
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {

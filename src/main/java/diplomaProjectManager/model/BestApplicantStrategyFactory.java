@@ -1,7 +1,5 @@
 package diplomaProjectManager.model;
 
-import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,24 +7,24 @@ import org.springframework.stereotype.Component;
 public class BestApplicantStrategyFactory {
 
 	@Autowired
+	private RandomStrategy randomStrategy;
+	@Autowired
 	private BestAvgGradeStrategy bestAvgGradeStrategy;
-	
 	@Autowired
 	private FewestCoursesStrategy fewestCoursesStrategy;
+	@Autowired
+	private ThresholdStrategy thresholdStrategy;
 	
-	public /*static*/ BestApplicantStrategy createStrategy(String strategy) {
+	public BestApplicantStrategy createStrategy(String strategy) {
 		switch (strategy) {
 		case "random":
-			if(new Random().nextBoolean())
-				return bestAvgGradeStrategy;
-			return fewestCoursesStrategy;
+			return randomStrategy;
 		case "avgGrade":
 			return bestAvgGradeStrategy;
 		case "fewestCourses":
 			return fewestCoursesStrategy;
-		//case "threshold": TODO
-			// code block
-			//break;
+		case "threshold":
+			return thresholdStrategy;
 		default:
 			return null;
 		}

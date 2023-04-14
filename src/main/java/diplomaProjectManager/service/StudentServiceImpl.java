@@ -4,23 +4,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import diplomaProjectManager.dao.ApplicationDAO;
-import diplomaProjectManager.dao.ProfessorDAO;
 import diplomaProjectManager.dao.StudentDAO;
-import diplomaProjectManager.dao.SubjectDAO;
 import diplomaProjectManager.model.Application;
-import diplomaProjectManager.model.Professor;
 import diplomaProjectManager.model.Student;
 import diplomaProjectManager.model.Subject;
 
 @Service
+@Transactional
 public class StudentServiceImpl implements StudentService {
 
 	@Autowired
@@ -31,13 +26,11 @@ public class StudentServiceImpl implements StudentService {
 	private ApplicationDAO applicationDAO;
 	
 	@Override
-	@Transactional
 	public void saveProfile(Student student) {
 		studentDAO.save(student);
 	}
 
 	@Override
-	@Transactional
 	public Student retrieveProfile(String username) throws UsernameNotFoundException{
 		return studentDAO.findByUsername(username).orElseThrow(
 				()-> new UsernameNotFoundException(String.format("USER_NOT_FOUND", username))
@@ -45,13 +38,11 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	@Transactional
 	public List<Subject> listStudentSubjects() {
 		return subjectService.findAll();
 	}
 
 	@Override
-	@Transactional
 	public void applyToSubject(String username, int subjectId) {
 		Application application = new Application();
 
@@ -62,8 +53,7 @@ public class StudentServiceImpl implements StudentService {
     	subject.getApplications().add(application);
     	try {
     		applicationDAO.save(application);
-    	} catch (DataIntegrityViolationException e) {} // catch duplicate apps
+    	} catch (DataIntegrityViolationException e) {} // catches duplicate apps
     	
 	}
-
 }

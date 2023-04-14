@@ -1,5 +1,7 @@
 package diplomaProjectManager.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import diplomaProjectManager.model.User;
@@ -11,6 +13,6 @@ public interface UserService {
 	
     public boolean isUserPresent(User user);
     
-	public User findById(String id);
+    public Optional<User> findById(int id);
     
 }

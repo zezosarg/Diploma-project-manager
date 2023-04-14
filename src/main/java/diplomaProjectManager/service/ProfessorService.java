@@ -18,11 +18,11 @@ public interface ProfessorService {
 	
 	List<Subject> listProfessorSubjects(String username);
 	
-	void addSubject(String string, Subject subject);
+	Subject addSubject(String username);
 	
-	List<Thesis> listProfessorTheses(String string);
+	List<Thesis> listProfessorTheses(String username);
 	
-	void assignSubject(String username, String string, int integer);
+	void assignSubject(String username, String strategy, int integer);
 		
 	List<Application> listApplications(int subjectId);
 	

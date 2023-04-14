@@ -20,12 +20,13 @@ import diplomaProjectManager.model.Subject;
 import diplomaProjectManager.model.Thesis;
 
 @Service
+@Transactional
 public class ProfessorServiceImpl implements ProfessorService {
 
 	@Autowired
 	private ProfessorDAO professorDAO;
 	@Autowired
-	private SubjectDAO subjectDAO;	//is this good design?//should this be delegated to subject service?
+	private SubjectDAO subjectDAO;
 	@Autowired
 	private ApplicationDAO applicationDAO;
 	@Autowired
@@ -34,7 +35,6 @@ public class ProfessorServiceImpl implements ProfessorService {
 	private BestApplicantStrategyFactory bestApplicantStrategyFactory;
 	
 	@Override
-	@Transactional
 	public Professor retrieveProfile(String username) throws UsernameNotFoundException{
 		return professorDAO.findByUsername(username).orElseThrow(
 				()-> new UsernameNotFoundException(String.format("USER_NOT_FOUND", username))
@@ -42,37 +42,34 @@ public class ProfessorServiceImpl implements ProfessorService {
 	}
 
 	@Override
-	@Transactional
 	public void saveProfile(Professor professor) {
 		professorDAO.save(professor);
 	}
 
 	@Override
-	@Transactional
 	public List<Subject> listProfessorSubjects(String username) {
 		return subjectDAO.findByProfessorUsername(username);
 	}
 
 	@Override
-	@Transactional
-	public void addSubject(String string, Subject subject) {
-		// TODO Auto-generated method stub
+	public Subject addSubject(String username) {
+		Professor professor = retrieveProfile(username);
+    	Subject subject = new Subject();
+    	subject.setProfessor(professor);
+    	return subject;
 	}
 
 	@Override
-	@Transactional
-	public List<Application> listApplications(/*String string, */int subjectId) {
+	public List<Application> listApplications(int subjectId) {
 		return applicationDAO.findBySubject(subjectId);
 	}
 
 	@Override
-	@Transactional
 	public List<Thesis> listProfessorTheses(String username) {
 		return thesisDAO.findByProfessorUsername(username);
 	}
 
 	@Override
-	@Transactional
 	public void assignSubject(String username, String strategyName, int subjectId) {
     	Thesis thesis = new Thesis();    	    	
     	Professor professor = retrieveProfile(username);
@@ -86,13 +83,11 @@ public class ProfessorServiceImpl implements ProfessorService {
 	}
 
 	@Override
-	@Transactional
 	public Thesis retrieveThesis(int thesisId) {
 		return thesisDAO.findById(thesisId);
 	}
 
 	@Override
-	@Transactional
 	public void saveThesis(Thesis thesis) {
 		thesisDAO.save(thesis);
 	}

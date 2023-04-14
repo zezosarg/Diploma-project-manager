@@ -2,11 +2,6 @@ DROP DATABASE dpm;
 CREATE DATABASE  IF NOT EXISTS `dpm`;
 USE `dpm`;
 
-#DROP TABLE IF EXISTS `users`;
-#DROP TABLE IF EXISTS `subjects`;
-#DROP TABLE IF EXISTS `theses`;
-#DROP TABLE IF EXISTS `applications`;
-
 CREATE TABLE `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `user_name` text DEFAULT NULL,
@@ -53,24 +48,3 @@ CREATE TABLE `applications` (
 	CONSTRAINT `fk_application_student` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`),
 	CONSTRAINT uq_applications UNIQUE(subject_id, student_id)
 )	ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
-# initially will use table users for both students and professors with unused fields set to null
-
-#DROP TABLE IF EXISTS `professors`;
-#DROP TABLE IF EXISTS `students`;
-
-#CREATE TABLE `professors` (
-#	`id` int NOT NULL AUTO_INCREMENT,
-#	`name` text DEFAULT NULL,
-#	`specialty` text DEFAULT NULL,
-#	PRIMARY KEY (`id`)
-#)	ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-#
-#CREATE TABLE `students` (
-#	`id` int NOT NULL AUTO_INCREMENT,
-#	`name` text DEFAULT NULL,
-#	`years_studying` int DEFAULT NULL,
-#	`avg_grade` double DEFAULT NULL,
-#	`num_courses_left` int DEFAULT NULL, 
-#	PRIMARY KEY (`id`)
-#)	ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

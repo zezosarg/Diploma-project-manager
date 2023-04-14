@@ -42,8 +42,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 	
 	@Override
-	public User findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<User> findById(int id) {
+		return userDAO.findById(id);
 	}
 }

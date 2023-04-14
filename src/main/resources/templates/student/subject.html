@@ -24,26 +24,20 @@
 			<tr>
 				<th>Title</th>
 				<th>Objectives</th>
-				<th>Action</th>
+				<th>Supervisor</th>
 			</tr>
 		</thead>
 		
 		<tbody>
 				<td th:text="${subject.title}" />	
-				<td th:text="${subject.objectives}" />		
+				<td th:text="${subject.objectives}" />
+				<td th:text="${professor.fullname}" />	
 				
-				<td>
-					<a th:href="@{/student/subject(subjectId=${subject.id})}"
-					   class="btn btn-info btn-sm">
-						Apply
-					</a>
-					
-				</td>
 		</tbody>		
 	</table>
 
 		<hr>
-		<a th:href="@{/student/dashboard}">Back to student subjects</a>	
+		<a th:href="@{/student/subjects}">Back to student subjects</a>	
 
 </div>
 	

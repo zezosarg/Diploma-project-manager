@@ -3,7 +3,6 @@ package diplomaProjectManager.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -12,26 +11,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import diplomaProjectManager.dao.StudentDAO;
-import diplomaProjectManager.dao.SubjectDAO;
-import diplomaProjectManager.dao.ThesisDAO;
 import diplomaProjectManager.model.Application;
-import diplomaProjectManager.model.BestApplicantStrategy;
-import diplomaProjectManager.model.BestApplicantStrategyFactory;
 import diplomaProjectManager.model.Professor;
-import diplomaProjectManager.model.Student;
 import diplomaProjectManager.model.Subject;
 import diplomaProjectManager.model.Thesis;
 import diplomaProjectManager.service.ProfessorService;
 import diplomaProjectManager.service.SubjectService;
-import diplomaProjectManager.service.UserService;
 
 @Controller
 public class ProfessorController {
 	
-//	private String currentPrincipalName;
 	@Autowired
 	private ProfessorService professorService;
 	@Autowired
@@ -39,16 +29,12 @@ public class ProfessorController {
 	
 	@RequestMapping("/professor/dashboard")
     public String getProfessorHome(){
-//    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//    	String currentPrincipalName = authentication.getName();
         return "professor/dashboard";
     }
     
     @RequestMapping("/professor/profile")
 	public String retrieveProfile(Model model) {
-    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    	String currentPrincipalName = authentication.getName();
-    	Professor professor = professorService.retrieveProfile(currentPrincipalName);
+    	Professor professor = professorService.retrieveProfile(getCurrentPrincipal());
     	model.addAttribute("professor", professor);
     	return "professor/profile";
 	}
@@ -61,9 +47,7 @@ public class ProfessorController {
 	
     @RequestMapping("/professor/subjects")
 	public String listProfessorSubjects(Model model) {
-    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-    	List<Subject> subjects = professorService.listProfessorSubjects(currentPrincipalName);
+    	List<Subject> subjects = professorService.listProfessorSubjects(getCurrentPrincipal());
     	model.addAttribute("subjects", subjects);
 		return "professor/subjects";
 	}
@@ -76,11 +60,7 @@ public class ProfessorController {
     
     @RequestMapping("/professor/add-subject")
     public String addSubject(Model model) {
-    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-    	Professor professor = professorService.retrieveProfile(currentPrincipalName);
-    	Subject subject = new Subject();
-    	subject.setProfessor(professor);//professorService.addSubject(string, subject);
+    	Subject subject = professorService.addSubject(getCurrentPrincipal());
     	model.addAttribute("subject", subject);
     	return "/professor/subject";
     }
@@ -100,18 +80,14 @@ public class ProfessorController {
 	}
 	
     @RequestMapping("/professor/assignSubject")
-	public String assignSubject(@RequestParam("subjectId") int subjectId, @RequestParam("strategyName") String strategyName, Model model) {
-    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    	String currentPrincipalName = authentication.getName();		
-    	professorService.assignSubject(currentPrincipalName, strategyName, subjectId);
+	public String assignSubject(@RequestParam("subjectId") int subjectId, @RequestParam("strategyName") String strategyName, Model model) {		
+    	professorService.assignSubject(getCurrentPrincipal(), strategyName, subjectId);
     	return "redirect:/professor/subjects";
 	}
 	
 	@RequestMapping("/professor/theses")
 	public String listProfessorTheses(Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-    	List<Thesis> theses = professorService.listProfessorTheses(currentPrincipalName);
+    	List<Thesis> theses = professorService.listProfessorTheses(getCurrentPrincipal());
     	model.addAttribute("theses", theses);
 		return "professor/theses";
 	}
@@ -128,5 +104,10 @@ public class ProfessorController {
     	thesis.calculateGrade();
 		professorService.saveThesis(thesis);
 		return "redirect:/professor/theses";
+	}
+	
+	public String getCurrentPrincipal() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		return authentication.getName();
 	}
 }
