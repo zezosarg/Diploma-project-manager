@@ -35,7 +35,7 @@ public class StudentController {
     	Student student = studentService.retrieveProfile(getCurrentPrincipal());
     	model.addAttribute("student", student);
     	return "student/profile";
-	}
+	}//TODO show message that he has been assigned subject
     
     @PostMapping("/student/save")
 	public String saveProfile(@ModelAttribute("student") Student student, Model model) {
