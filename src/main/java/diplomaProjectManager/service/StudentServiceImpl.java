@@ -10,9 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import diplomaProjectManager.dao.ApplicationDAO;
 import diplomaProjectManager.dao.StudentDAO;
+import diplomaProjectManager.dao.ThesisDAO;
 import diplomaProjectManager.model.Application;
 import diplomaProjectManager.model.Student;
 import diplomaProjectManager.model.Subject;
+import diplomaProjectManager.model.Thesis;
 
 @Service
 @Transactional
@@ -24,6 +26,8 @@ public class StudentServiceImpl implements StudentService {
 	private SubjectService subjectService;
 	@Autowired
 	private ApplicationDAO applicationDAO;
+	@Autowired
+	private ThesisDAO thesisDAO;
 	
 	@Override
 	public void saveProfile(Student student) {
@@ -55,5 +59,10 @@ public class StudentServiceImpl implements StudentService {
     		applicationDAO.save(application);
     	} catch (DataIntegrityViolationException e) {} // catches duplicate apps
     	
+	}
+
+	@Override
+	public Thesis getThesis(String username) {
+		return thesisDAO.findByStudentUsername(username);
 	}
 }

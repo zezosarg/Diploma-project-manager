@@ -22,7 +22,8 @@
 	<table class="table table-bordered table-striped">
 		<thead class="thead-dark">
 			<tr>
-				<th>ID</th>
+				<th>Subject</th>
+				<th>Assignee</th>
 				<th>Grade</th>
 				<th>Action</th>
 			</tr>
@@ -31,14 +32,12 @@
 		<tbody>
 			<tr th:each="thesis : ${theses}">
 			
-				<td th:text="${thesis.id}" />
+				<td th:text="${thesis.subject.title}" />
+				<td th:text="${thesis.student.fullname}" />
 				<td th:text="${thesis.overallGrade}" />
 				
 				<td>
-					<a th:href="@{/professor/setGrades(thesisId=${thesis.id})}"
-					   class="btn btn-info btn-sm">
-						Set grades
-					</a>
+					<a th:href="@{/professor/setGrades(thesisId=${thesis.id})}" class="btn btn-info btn-sm"> Set grades </a>
 				</td>
 				
 			</tr>

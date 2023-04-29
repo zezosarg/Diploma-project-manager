@@ -34,7 +34,7 @@ public class AuthController {
         }
 
         userService.saveUser(user);
-        model.addAttribute("successMessage", "User registered successfully!"); //TODO
+        model.addAttribute("successMessage", "User registered successfully!");
 
         return "auth/signin";
     }

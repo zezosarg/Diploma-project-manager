@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import diplomaProjectManager.model.Student;
 import diplomaProjectManager.model.Subject;
+import diplomaProjectManager.model.Thesis;
 import diplomaProjectManager.service.StudentService;
 import diplomaProjectManager.service.SubjectService;
 
@@ -26,7 +27,15 @@ public class StudentController {
 	private SubjectService subjectService;
 
     @RequestMapping("/student/dashboard")
-    public String getStudentHome(){
+    public String getStudentHome(Model model){
+    	Student student = studentService.retrieveProfile(getCurrentPrincipal());
+    	Thesis thesis = studentService.getThesis(student.getUsername());
+    	if (thesis!=null)
+    		model.addAttribute("successMessage", 
+    				"You have been assigned subject "+thesis.getSubject().getTitle()
+    				+" by "+thesis.getSubject().getProfessor().getFullname()
+    				+" with the objective to "+thesis.getSubject().getObjectives()
+    		);
         return "student/dashboard";
     }
     
@@ -35,7 +44,7 @@ public class StudentController {
     	Student student = studentService.retrieveProfile(getCurrentPrincipal());
     	model.addAttribute("student", student);
     	return "student/profile";
-	}//TODO show message that he has been assigned subject
+	}
     
     @PostMapping("/student/save")
 	public String saveProfile(@ModelAttribute("student") Student student, Model model) {
