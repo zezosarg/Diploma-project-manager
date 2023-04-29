@@ -78,6 +78,8 @@ public class ProfessorServiceImpl implements ProfessorService {
     	thesis.setSubject(subject);
     	BestApplicantStrategy strategy = bestApplicantStrategyFactory.createStrategy(strategyName);
     	Student student = strategy.findBestApplicant(subject.getApplications());
+    	if (student==null)
+    		return;
     	thesis.setStudent(student);
     	thesisDAO.save(thesis);
 	}

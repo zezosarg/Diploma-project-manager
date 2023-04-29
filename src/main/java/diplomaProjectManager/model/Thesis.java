@@ -1,7 +1,5 @@
 package diplomaProjectManager.model;
 
-import javax.persistence.CascadeType;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,15 +31,15 @@ public class Thesis {
 	@Column(name="presentation_grade")
 	private float presentationGrade;
 	
-	@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToOne
     @JoinColumn(name = "subject_id")
 	private Subject subject;
 	
-	@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToOne
     @JoinColumn(name = "student_id")
 	private Student student;
 	
-	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne
 	@JoinColumn(name="professor_id")
 	private Professor professor;
 

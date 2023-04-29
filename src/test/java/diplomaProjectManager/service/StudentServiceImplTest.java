@@ -1,6 +1,4 @@
-package diplomaProjectManager.dao;
-
-import java.util.List;
+package diplomaProjectManager.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,21 +9,25 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import diplomaProjectManager.model.Thesis;
+import diplomaProjectManager.dao.ApplicationDAO;
+import diplomaProjectManager.model.Application;
 
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application.properties")
 @ExtendWith(SpringExtension.class)
 @Sql({"../schema.sql", "../data.sql"})
-class ThesisDAOTest {
+class StudentServiceImplTest {
 
 	@Autowired
-	ThesisDAO thesisDAO;
+	StudentServiceImpl studentServiceImpl;
+	@Autowired
+	ApplicationDAO applicationDAO;
 	
 	@Test
-	void testFindByProfessorUsername() {
-		List<Thesis> theses = thesisDAO.findByProfessorUsername("zas");
-		Assertions.assertEquals("zas", theses.get(0).getProfessor().getUsername());
+	void testApplyToSubject() {
+		studentServiceImpl.applyToSubject("liakos", 1);
+		Application createdApplication = applicationDAO.findById(9);
+		Assertions.assertNotNull(createdApplication);
 	}
 
 }

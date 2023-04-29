@@ -9,8 +9,8 @@ VALUES
 INSERT INTO users
 	(user_id, user_name, password, role, full_name, years_studying, avg_grade, num_courses_left)
 VALUES
-	(3, 'rgz', '$2a$10$4ZZIbTuIpHAHzJuT5hyNpe8j72EK/ZAxzEB551c0.hR.vz9tKRL5C', 'STUDENT', 'Argyrios Zezos', 5, 7.01, 14),
-	(4, 'ofwtios', '$2a$10$4ZZIbTuIpHAHzJuT5hyNpe8j72EK/ZAxzEB551c0.hR.vz9tKRL5C', 'STUDENT', 'Fwtios Pappas', 4, 7.00, 15),
+	(3, 'rgz', '$2a$10$4ZZIbTuIpHAHzJuT5hyNpe8j72EK/ZAxzEB551c0.hR.vz9tKRL5C', 'STUDENT', 'Argyrios Zezos', 5, 8, 14),
+	(4, 'ofwtios', '$2a$10$4ZZIbTuIpHAHzJuT5hyNpe8j72EK/ZAxzEB551c0.hR.vz9tKRL5C', 'STUDENT', 'Fwtios Pappas', 4, 9, 15),
 	(5, 'liakos', '$2a$10$4ZZIbTuIpHAHzJuT5hyNpe8j72EK/ZAxzEB551c0.hR.vz9tKRL5C', 'STUDENT', 'Hlias Dhmopoylos', 4, 10, 1);
 
 INSERT INTO subjects

@@ -46,7 +46,7 @@ public class Student {
 	@Column(name="num_courses_left")
 	private Integer numCoursesLeft;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL/*, mappedBy="student"*/)
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name = "student_id")
 	private List<Application> applications;
 

@@ -13,5 +13,7 @@ public interface ApplicationDAO extends JpaRepository<Application, Integer>{
 
 	@Query(value = "SELECT * FROM applications AS a JOIN subjects AS s ON a.subject_id=s.subject_id WHERE a.subject_id=?1", nativeQuery=true)
 	List<Application> findBySubject(int subjectId);
+	
+	Application findById(int id);
 
 }
