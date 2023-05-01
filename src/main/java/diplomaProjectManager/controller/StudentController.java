@@ -69,7 +69,7 @@ public class StudentController {
     public String showSubject(@RequestParam("subjectId") int subjectId, Model model) {
     	Subject subject = subjectService.findById(subjectId);
     	model.addAttribute("subject", subject);
-    	model.addAttribute(subject.getProfessor());
+    	model.addAttribute("professor", subject.getProfessor());
     	return "student/subject";
     }
     

@@ -27,5 +27,10 @@ class ThesisDAOTest {
 		List<Thesis> theses = thesisDAO.findByProfessorUsername("zas");
 		Assertions.assertEquals("zas", theses.get(0).getProfessor().getUsername());
 	}
+	
+	@Test
+	void  testFindByStudentUsername() {
+		//TODO
+	}
 
 }

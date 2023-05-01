@@ -18,9 +18,9 @@ import diplomaProjectManager.dao.ApplicationDAO;
 class BestAvgGradeStrategyTest {
 
 	@Autowired
-	BestAvgGradeStrategy bestAvgGradeStrategy;
+	private BestAvgGradeStrategy bestAvgGradeStrategy;
 	@Autowired
-	ApplicationDAO applicationDAO;
+	private ApplicationDAO applicationDAO;
 	
 	@Test
 	void test() {
