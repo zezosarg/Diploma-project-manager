@@ -1,5 +1,6 @@
 package diplomaProjectManager.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -16,9 +17,12 @@ public class RandomStrategy implements BestApplicantStrategy{
 	
 	@Override
 	public Student findBestApplicant(List<Application> applications) {
+		List<Integer> candidateApplicationIds = new ArrayList<>();
+		for (Application application : applications)
+			candidateApplicationIds.add(application.getId());
 		Random random = new Random();
-		int index = random.nextInt(applications.size());
-		return studentDAO.findByApplicationId(index);
+		int randomIndex = random.nextInt(candidateApplicationIds.size());
+		return studentDAO.findByApplicationId(candidateApplicationIds.get(randomIndex));
 	}
 	
 }
