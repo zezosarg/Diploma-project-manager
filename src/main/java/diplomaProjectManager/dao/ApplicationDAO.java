@@ -16,4 +16,6 @@ public interface ApplicationDAO extends JpaRepository<Application, Integer>{
 	
 	Application findById(int id);
 
+	void deleteByStudentUsername(String username);//TODO
+
 }

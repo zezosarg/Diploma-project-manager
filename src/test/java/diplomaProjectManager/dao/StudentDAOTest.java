@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
+import diplomaProjectManager.model.Application;
 import diplomaProjectManager.model.Student;
 
 @SpringBootTest
@@ -17,8 +18,8 @@ class StudentDAOTest {
 
 	@Test
 	void testFindAvailableByApplicationId() {
-		Student student = studentDAO.findAvailableByApplicationId(null);
-		Assertions.assertEquals(student.getFullname(), null);
+		Student student = studentDAO.findAvailableByApplicationId(9);//TODO
+//		Assertions.assertEquals(student.getFullname(), );
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import diplomaProjectManager.dao.ApplicationDAO;
 import diplomaProjectManager.dao.ProfessorDAO;
+import diplomaProjectManager.dao.StudentDAO;
 import diplomaProjectManager.dao.SubjectDAO;
 import diplomaProjectManager.dao.ThesisDAO;
 import diplomaProjectManager.model.Application;
@@ -82,6 +83,7 @@ public class ProfessorServiceImpl implements ProfessorService {
     		return;
     	thesis.setStudent(student);
     	thesisDAO.save(thesis);
+    	applicationDAO.deleteByStudentUsername(username);//TODO
 	}
 
 	@Override

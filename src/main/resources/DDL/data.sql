@@ -24,7 +24,7 @@ VALUES
 INSERT INTO applications
 	(application_id, subject_id, student_id)
 VALUES
-	(1, 1, 3), (2, 3, 3), (3, 4, 3),
+	(1, 1, 3), (9, 2, 3), (2, 3, 3), (3, 4, 3),
 	(4, 1, 4), (5, 2, 4), (6, 3, 4),
 	(7, 2, 5), (8, 3, 5);
 

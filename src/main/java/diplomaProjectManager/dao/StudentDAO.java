@@ -11,10 +11,9 @@ import diplomaProjectManager.model.Student;
 @Repository
 public interface StudentDAO extends JpaRepository<Student, Integer>{
 
-	@Query(value = "SELECT * FROM users JOIN applications ON user_id=student_id WHERE application_id=?1"
-			+ "AND student_id NOT IN SELECT student_id FROM theses", nativeQuery = true)
+	@Query(value = "SELECT * FROM users JOIN applications ON user_id=student_id WHERE application_id=?1", nativeQuery = true)
 	Student findAvailableByApplicationId(int applicationId);
 
 	Optional<Student> findByUsername(String username);
-	
+
 }
