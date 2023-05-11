@@ -42,8 +42,8 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Subject> listStudentSubjects() {
-		return subjectService.findAll();
+	public List<Subject> listStudentSubjects(String username) {
+		return subjectService.findAll(username);
 	}
 
 	@Override

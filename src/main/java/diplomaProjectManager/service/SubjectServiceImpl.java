@@ -27,12 +27,13 @@ public class SubjectServiceImpl implements SubjectService {
 	}
 	
 	@Override
-	public List<Subject> findAll() {
-		return subjectDAO.findAvailable();
+	public List<Subject> findAll(String username) {
+		return subjectDAO.findAvailableByStudentUsername(username);
 	}
 
 	@Override
 	public Subject findById(int id) {
 		return subjectDAO.findById(id);
 	}
+
 }

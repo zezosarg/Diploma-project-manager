@@ -15,7 +15,7 @@ public interface StudentService {
 	
 	Student retrieveProfile(String username);
 	
-	List<Subject> listStudentSubjects();
+	List<Subject> listStudentSubjects(String username);
 	
 	void applyToSubject(String username, int subjectId);
 	

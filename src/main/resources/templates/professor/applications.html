@@ -28,35 +28,40 @@
 
 		<hr>
 
-		<h4>Assignment method</h4>
+		<h4>Assignment strategy</h4>
 
 		<br>
 
-		<a th:href="@{/professor/assignSubject(subjectId=${subjectId}, strategyName='random')}"
-			class="btn btn-info btn-sm">
-			Random choice
-		</a>
-	
-		<a th:href="@{/professor/assignSubject(subjectId=${subjectId}, strategyName='avgGrade')}"
-		   class="btn btn-info btn-sm">
-			Best grade
-		</a>
-
-		<a th:href="@{/professor/assignSubject(subjectId=${subjectId}, strategyName='fewestCourses')}"
-		   class="btn btn-info btn-sm">
-			Fewest courses
-		</a>
-
-		<a th:href="@{/professor/assignSubject(subjectId=${subjectId}, strategyName='fewestCourses')}"
-		   class="btn btn-info btn-sm">
-			Threshold
-		</a>
+		<form name="myForm" th:action="@{/professor/assignSubject(subjectId=${subjectId})}" onsubmit="return validateForm()" method="post">
+		  <select class="custom-select" id="strategy" name="strategy">
+		    <option value="random">Random choice</option>
+		    <option value="avgGrade">Best grade</option>
+		    <option value="fewestCourses">Fewest courses</option>
+		    <option value="threshold">Threshold</option>
+		  </select>
+		  <br><br>
+		  <button type="submit" class="btn btn-primary">Assign Subject</button>
+		</form>
 
 		<hr>
 
 		<a th:href="@{/professor/subjects}">Back to professor subjects</a>	
 
 </div>
+
+<script th:inline="javascript">
+
+	let applicationsList = /*[[${applications}]]*/;
+
+	function validateForm(){
+		if(applicationsList.length == 0){ 
+	    	alert("There are no applications to be assigned!");
+	    	return false;
+	  	}
+		return true;
+	}
+
+</script>
 	
 </body>
 </html>

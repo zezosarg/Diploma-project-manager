@@ -15,7 +15,7 @@ public class ThresholdStrategy implements BestApplicantStrategy{
 	@Override
 	public Student findBestApplicant(List<Application> applications) {	// if 2 students fit the criteria, the earliest wins
 		for (Application application: applications) {
-			Student student = studentDAO.findByApplicationId(application.getId());
+			Student student = studentDAO.findAvailableByApplicationId(application.getId());
 			if (student.getAvgGrade() > 6/*Th1*/ && student.getNumCoursesLeft() < 10/*Th2*/)
 				return student;
 		}

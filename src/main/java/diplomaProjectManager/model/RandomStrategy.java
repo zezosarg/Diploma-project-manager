@@ -22,7 +22,7 @@ public class RandomStrategy implements BestApplicantStrategy{
 			candidateApplicationIds.add(application.getId());
 		Random random = new Random();
 		int randomIndex = random.nextInt(candidateApplicationIds.size());
-		return studentDAO.findByApplicationId(candidateApplicationIds.get(randomIndex));
+		return studentDAO.findAvailableByApplicationId(candidateApplicationIds.get(randomIndex));
 	}
 	
 }

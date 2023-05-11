@@ -11,21 +11,21 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import diplomaProjectManager.model.Thesis;
+import diplomaProjectManager.model.Subject;
 
+//@TestPropertySource(locations = "classpath:application.properties")
+//@ExtendWith(SpringExtension.class)
 @SpringBootTest
-@TestPropertySource(locations = "classpath:application.properties")
-@ExtendWith(SpringExtension.class)
 @Sql({"../schema.sql", "../data.sql"})
-class ThesisDAOTest {
+class SubjectDAOTest {
 
 	@Autowired
-	ThesisDAO thesisDAO;
+	SubjectDAO subjectDAO;
 	
 	@Test
-	void testFindByProfessorUsername() {
-		List<Thesis> theses = thesisDAO.findByProfessorUsername("zas");
-		Assertions.assertEquals("zas", theses.get(0).getProfessor().getUsername());
+	void testFindAvailableByStudentId() {
+		List<Subject> subjects = subjectDAO.findAvailableByStudentUsername("liakos");
+		Assertions.assertEquals(subjects.get(1).getTitle(), "Data visualizer");
 	}
 
 }

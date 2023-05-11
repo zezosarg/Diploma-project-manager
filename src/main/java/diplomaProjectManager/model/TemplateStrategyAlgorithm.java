@@ -20,7 +20,7 @@ public abstract class TemplateStrategyAlgorithm implements BestApplicantStrategy
 			if (compareApplications(application, bestApplication) == 1)
 				bestApplication = application;
 		}
-		return studentDAO.findByApplicationId(bestApplication.getId());
+		return studentDAO.findAvailableByApplicationId(bestApplication.getId());
 	}
 
 	public abstract int compareApplications(Application application1, Application application2);

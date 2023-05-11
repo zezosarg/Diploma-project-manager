@@ -80,8 +80,8 @@ public class ProfessorController {
 	}
 	
     @RequestMapping("/professor/assignSubject")
-	public String assignSubject(@RequestParam("subjectId") int subjectId, @RequestParam("strategyName") String strategyName, Model model) {		
-    	professorService.assignSubject(getCurrentPrincipal(), strategyName, subjectId);
+	public String assignSubject(@RequestParam("subjectId") int subjectId, @RequestParam("strategy") String strategy, Model model) {		
+    	professorService.assignSubject(getCurrentPrincipal(), strategy, subjectId);
     	return "redirect:/professor/subjects";
 	}
 	

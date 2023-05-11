@@ -11,10 +11,10 @@ public interface SubjectService {
 	
 	void save(Subject subject);
 	
-	List<Subject> findAll();
-	
 	Subject findById(int id);
 
 	void deleteById(int subjectId);
+
+	List<Subject> findAll(String username);
 
 }

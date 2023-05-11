@@ -54,7 +54,7 @@ public class StudentController {
     
     @RequestMapping("/student/subjects")
 	public String listStudentSubjects(Model model) {
-    	List<Subject> subjects = studentService.listStudentSubjects();
+    	List<Subject> subjects = studentService.listStudentSubjects(getCurrentPrincipal());
     	model.addAttribute("subjects", subjects);
 		return "student/subjects";
 	}
