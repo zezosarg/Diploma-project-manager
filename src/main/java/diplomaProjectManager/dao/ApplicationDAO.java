@@ -11,11 +11,10 @@ import diplomaProjectManager.model.Application;
 @Repository
 public interface ApplicationDAO extends JpaRepository<Application, Integer>{
 
-	@Query(value = "SELECT * FROM applications AS a JOIN subjects AS s ON a.subject_id=s.subject_id WHERE a.subject_id=?1", nativeQuery=true)
-	List<Application> findBySubject(int subjectId);
-	
+	@Query(value = "SELECT * FROM applications AS a JOIN subjects AS s ON a.subject_id=s.subject_id WHERE a.subject_id=?1"
+			+ " AND a.subject_id NOT IN (SELECT subject_id FROM theses)", nativeQuery=true)
+	List<Application> findAvailableBySubjectId(int id);
+
 	Application findById(int id);
-
-	void deleteByStudentUsername(String username);//TODO
-
+	
 }

@@ -49,6 +49,10 @@ public class Student {
 	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name = "student_id")
 	private List<Application> applications;
+	
+	public Student(int id) {
+		this.id = id;
+	}
 
 	public int getId() {
 		return id;

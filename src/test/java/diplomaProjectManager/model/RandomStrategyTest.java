@@ -26,7 +26,7 @@ class RandomStrategyTest {
 	
 	@Test
 	void test() {
-		List<Application> applications = applicationDAO.findBySubject(1);
+		List<Application> applications = applicationDAO.findAvailableBySubjectId(1);
 		Student student = randomStrategy.findBestApplicant(applications);
 		System.out.println(student.getFullname());
 		Assertions.assertNotNull(student);

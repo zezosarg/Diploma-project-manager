@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import diplomaProjectManager.dao.ApplicationDAO;
 import diplomaProjectManager.dao.ProfessorDAO;
-import diplomaProjectManager.dao.StudentDAO;
 import diplomaProjectManager.dao.SubjectDAO;
 import diplomaProjectManager.dao.ThesisDAO;
 import diplomaProjectManager.model.Application;
@@ -62,7 +61,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 
 	@Override
 	public List<Application> listApplications(int subjectId) {
-		return applicationDAO.findBySubject(subjectId);
+		return applicationDAO.findAvailableBySubjectId(subjectId);
 	}
 
 	@Override
@@ -78,12 +77,11 @@ public class ProfessorServiceImpl implements ProfessorService {
     	Subject subject = subjectDAO.findById(subjectId);
     	thesis.setSubject(subject);
     	BestApplicantStrategy strategy = bestApplicantStrategyFactory.createStrategy(strategyName);
-    	Student student = strategy.findBestApplicant(subject.getApplications());
+    	Student student = strategy.findBestApplicant(applicationDAO.findAvailableBySubjectId(subject.getId()));//subject.getApplications());
     	if (student==null)
     		return;
     	thesis.setStudent(student);
     	thesisDAO.save(thesis);
-    	applicationDAO.deleteByStudentUsername(username);//TODO
 	}
 
 	@Override
