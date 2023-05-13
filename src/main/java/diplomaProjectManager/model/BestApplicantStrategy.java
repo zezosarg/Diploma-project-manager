@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface BestApplicantStrategy {
 
-	Student findBestApplicant(List<Application> applicationList);
+	Student findBestApplicant(List<Application> applicationList, int...threshold);
 	
 }

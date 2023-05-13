@@ -23,7 +23,7 @@ class BestAvgGradeStrategyTest {
 	private ApplicationDAO applicationDAO;
 	
 	@Test
-	void test() {
+	void testBestAvgGradeStrategy() {
 		Application application1 = applicationDAO.findById(1);
 		Application application2 = applicationDAO.findById(4);
 		int result = bestAvgGradeStrategy.compareApplications(application1, application2);

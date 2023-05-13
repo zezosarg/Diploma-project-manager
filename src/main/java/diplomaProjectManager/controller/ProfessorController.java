@@ -80,8 +80,12 @@ public class ProfessorController {
 	}
 	
     @RequestMapping("/professor/assignSubject")
-	public String assignSubject(@RequestParam("subjectId") int subjectId, @RequestParam("strategy") String strategy, Model model) {		
-    	professorService.assignSubject(getCurrentPrincipal(), strategy, subjectId);
+	public String assignSubject(@RequestParam("subjectId") int subjectId, @RequestParam("strategy") String strategy,
+	@RequestParam(name = "t1", required = false) Integer t1, @RequestParam(name = "t2", required = false) Integer t2, Model model) {
+    	if (t1 != null && t2 != null)
+    		professorService.assignSubject(getCurrentPrincipal(), strategy, subjectId, t1, t2);
+    	else
+    		professorService.assignSubject(getCurrentPrincipal(), strategy, subjectId);
     	return "redirect:/professor/subjects";
 	}
 	

@@ -19,14 +19,14 @@ VALUES
 	(1, 'Taxpayer Manager', 'Refactor a legacy application', 1),
 	(2, 'Diploma project manager', 'Create a Spring Boot web application', 1),
 	(3, 'Gantt Manager', 'Implement the backend of a java application', 2),
-	(4, 'Data visualizer', 'Create a web app on top of a database made out of raw data', 2);
+	(4, 'Data visualizer', 'Create a web app to visualize data', 2);
 
 INSERT INTO applications
 	(application_id, subject_id, student_id)
 VALUES
 	(1, 1, 3), (9, 2, 3), (2, 3, 3), (3, 4, 3),
 	(4, 1, 4), (5, 2, 4), (6, 3, 4),
-	(7, 2, 5), (8, 3, 5);
+			   (7, 2, 5), (8, 3, 5);
 
 INSERT INTO theses
 	(thesis_id, overall_grade, implementation_grade, report_grade, presentation_grade, professor_id, subject_id, student_id)

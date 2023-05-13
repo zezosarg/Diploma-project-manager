@@ -14,7 +14,7 @@ public abstract class TemplateStrategyAlgorithm implements BestApplicantStrategy
 	private StudentDAO studentDAO;
 	
 	@Override
-	public Student findBestApplicant(List<Application> applications) {
+	public Student findBestApplicant(List<Application> applications, int...threshold) {
 		Application bestApplication = applications.get(0);
 		for (Application application : applications) {
 			if (compareApplications(application, bestApplication) == 1)

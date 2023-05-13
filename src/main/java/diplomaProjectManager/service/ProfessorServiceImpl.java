@@ -70,15 +70,20 @@ public class ProfessorServiceImpl implements ProfessorService {
 	}
 
 	@Override
-	public void assignSubject(String username, String strategyName, int subjectId) {
+	public void assignSubject(String username, String strategyName, int subjectId, int...threshold) {
     	Thesis thesis = new Thesis();    	    	
     	Professor professor = retrieveProfile(username);
     	thesis.setProfessor(professor);
     	Subject subject = subjectDAO.findById(subjectId);
     	thesis.setSubject(subject);
     	BestApplicantStrategy strategy = bestApplicantStrategyFactory.createStrategy(strategyName);
-    	Student student = strategy.findBestApplicant(applicationDAO.findAvailableBySubjectId(subject.getId()));//subject.getApplications());
-    	if (student==null)
+    	Student student;
+    	List<Application> applications = applicationDAO.findAvailableBySubjectId(subject.getId());
+    	if(threshold.length == 2)
+    		student = strategy.findBestApplicant(applications, threshold[0], threshold[1]);
+    	else
+    		student = strategy.findBestApplicant(applications);
+    	if (student == null)
     		return;
     	thesis.setStudent(student);
     	thesisDAO.save(thesis);

@@ -22,7 +22,7 @@ public interface ProfessorService {
 	
 	List<Thesis> listProfessorTheses(String username);
 	
-	void assignSubject(String username, String strategy, int integer);
+	void assignSubject(String username, String strategy, int subjectId, int...threshold);
 		
 	List<Application> listApplications(int subjectId);
 	

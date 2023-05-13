@@ -16,7 +16,7 @@ public class RandomStrategy implements BestApplicantStrategy{
 	private StudentDAO studentDAO;
 	
 	@Override
-	public Student findBestApplicant(List<Application> applications) {
+	public Student findBestApplicant(List<Application> applications, int...threshold) {
 		List<Integer> candidateApplicationIds = new ArrayList<>();
 		for (Application application : applications)
 			candidateApplicationIds.add(application.getId());

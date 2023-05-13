@@ -39,7 +39,16 @@
 		    <option value="fewestCourses">Fewest courses</option>
 		    <option value="threshold">Threshold</option>
 		  </select>
-		  <br><br>
+			<br><br>
+		  <div id="threshold-fields" style="display: none;">
+		    <div class="form-group">
+		      <input type="number" class="form-control" id="t1" name="t1" placeholder="Minimum grade">
+		    </div>
+		    <div class="form-group">
+		      <input type="number" class="form-control" id="t2" name="t2" placeholder="Maximum number of courses">
+		    </div>
+		  </div>
+		  <br>
 		  <button type="submit" class="btn btn-primary">Assign Subject</button>
 		</form>
 
@@ -60,6 +69,17 @@
 	  	}
 		return true;
 	}
+		
+	let strategySelect = document.getElementById("strategy");
+	let thresholdFields = document.getElementById("threshold-fields");
+
+	strategySelect.addEventListener("change", function() {
+    	if (strategySelect.value === "threshold") {
+      		thresholdFields.style.display = "block";
+    	} else {
+      		thresholdFields.style.display = "none";
+    	}
+  	});
 
 </script>
 	

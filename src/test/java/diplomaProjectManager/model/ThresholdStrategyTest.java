@@ -12,18 +12,18 @@ import diplomaProjectManager.dao.ApplicationDAO;
 
 @SpringBootTest
 @Sql({"../schema.sql", "../data.sql"})
-class RandomStrategyTest {
+class ThresholdStrategyTest {
 
 	@Autowired
-	private RandomStrategy randomStrategy;
+	private ThresholdStrategy thresholdStrategy;
 	@Autowired
 	private ApplicationDAO applicationDAO;
 	
 	@Test
-	void testRandomStrategy() {
-		List<Application> applications = applicationDAO.findAvailableBySubjectId(1);
-		Student student = randomStrategy.findBestApplicant(applications);
-		Assertions.assertNotNull(student);
+	void testThresholdStrategy() {
+		List<Application> applications = applicationDAO.findAvailableBySubjectId(3);
+		Student student = thresholdStrategy.findBestApplicant(applications, 8, 14);
+		Assertions.assertEquals(student.getUsername(), "liakos");
 	}
 
 }
