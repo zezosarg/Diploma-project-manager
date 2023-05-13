@@ -6,6 +6,6 @@ Developed for the software engineering cource @ CSE UoI.
 
 Supervised by professor Apostolos Zarras.
 
-The sprint report can be found inside the **doc** folder.
+The sprint report can be found inside the [doc](https://github.com/zezosarg/Diploma-project-manager/tree/main/doc) folder.
 
 To run, first setup mysql server on your machine and run the schema.sql script.
