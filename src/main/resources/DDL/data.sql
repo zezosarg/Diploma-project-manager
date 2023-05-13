@@ -31,4 +31,4 @@ VALUES
 INSERT INTO theses
 	(thesis_id, overall_grade, implementation_grade, report_grade, presentation_grade, professor_id, subject_id, student_id)
 VALUES
-	(1, -1, -1, -1, -1, 1, 2, 3);
+	(1, null, null, null, null, 1, 2, 3);

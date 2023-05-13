@@ -8,9 +8,9 @@ public class ThesisTest {
 	@Test
 	public void testCalculateGrade() {
 		Thesis thesis = new Thesis();
-		thesis.setImplementationGrade(10);
-		thesis.setReportGrade(10);
-		thesis.setPresentationGrade(10);
+		thesis.setImplementationGrade((float)10);
+		thesis.setReportGrade((float)10);
+		thesis.setPresentationGrade((float)10);
 		thesis.calculateGrade();
 		Assertions.assertEquals(thesis.getOverallGrade(), 10);
 	}

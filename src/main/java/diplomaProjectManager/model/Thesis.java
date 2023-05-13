@@ -20,16 +20,16 @@ public class Thesis {
 	private int id;
 	
 	@Column(name="overall_grade")
-	private float overallGrade;
+	private Float overallGrade;
 	
 	@Column(name="implementation_grade")
-	private float implementationGrade;
+	private Float implementationGrade;
 	
 	@Column(name="report_grade")
-	private float reportGrade;	
+	private Float reportGrade;	
 	
 	@Column(name="presentation_grade")
-	private float presentationGrade;
+	private Float presentationGrade;
 	
 	@OneToOne
     @JoinColumn(name = "subject_id")
@@ -44,7 +44,8 @@ public class Thesis {
 	private Professor professor;
 
 	public void calculateGrade() {
-		this.overallGrade = (float) ((0.7) * this.implementationGrade + (0.15) * this.reportGrade + (0.15) * this.presentationGrade);
+		if (!(this.implementationGrade.equals(null)||this.reportGrade.equals(null)||this.presentationGrade.equals(null)))
+			this.overallGrade = (float) ((0.7) * this.implementationGrade + (0.15) * this.reportGrade + (0.15) * this.presentationGrade);
 	}
 	
 	public int getId() {
@@ -71,35 +72,35 @@ public class Thesis {
 		this.student = student;
 	}
 
-	public float getOverallGrade() {
+	public Float getOverallGrade() {
 		return overallGrade;
 	}
 
-	public void setOverallGrade(float overallGrade) {
+	public void setOverallGrade(Float overallGrade) {
 		this.overallGrade = overallGrade;
 	}
 
-	public float getImplementationGrade() {
+	public Float getImplementationGrade() {
 		return implementationGrade;
 	}
 
-	public void setImplementationGrade(float implementationGrade) {
+	public void setImplementationGrade(Float implementationGrade) {
 		this.implementationGrade = implementationGrade;
 	}
 
-	public float getReportGrade() {
+	public Float getReportGrade() {
 		return reportGrade;
 	}
 
-	public void setReportGrade(float reportGrade) {
+	public void setReportGrade(Float reportGrade) {
 		this.reportGrade = reportGrade;
 	}
 
-	public float getPresentationGrade() {
+	public Float getPresentationGrade() {
 		return presentationGrade;
 	}
 
-	public void setPresentationGrade(float presentationGrade) {
+	public void setPresentationGrade(Float presentationGrade) {
 		this.presentationGrade = presentationGrade;
 	}
 

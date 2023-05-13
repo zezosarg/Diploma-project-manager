@@ -34,7 +34,7 @@
 			
 				<td th:text="${thesis.subject.title}" />
 				<td th:text="${thesis.student.fullname}" />
-				<td th:text="${thesis.overallGrade}" />
+				<td th:text="${thesis.overallGrade} ?: 'N/A'" />
 				
 				<td>
 					<a th:href="@{/professor/setGrades(thesisId=${thesis.id})}" class="btn btn-info btn-sm"> Set grades </a>
